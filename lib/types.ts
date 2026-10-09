@@ -43,4 +43,27 @@ export interface ProspectAnalysis {
   referensiPelanggan: { accountId: string; nama: string; alasan: string } | null;
   draftPesan: string;
   catatan: string[];
+  preseden: Precedent[];
+  alerts: CrossTrackAlert[];
+  rencanaAksi: string[];
+  nilaiHarapan: { persenTanpa: number; persenDengan: number; tambahan: number } | null;
+}
+
+export interface Precedent {
+  decisionId: string;
+  tipe: string;
+  keputusan: string;
+  nilai: string;
+  alasan: string;
+  diputuskanOleh: string;
+  tanggal: string;
+  akunPreseden: string;
+  relevansi: string;
+}
+
+export interface CrossTrackAlert {
+  level: "kritis" | "perhatian";
+  akunJembatan: string;
+  pesan: string;
+  bukti: string;
 }

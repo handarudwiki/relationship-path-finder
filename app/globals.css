@@ -420,3 +420,146 @@ textarea {
   border-radius: 50%;
   display: inline-block;
 }
+
+/* ---- Alert cross-track, rencana aksi, nilai harapan ---- */
+.alert-kritis {
+  background: rgba(214, 69, 69, 0.08);
+  border: 1px solid var(--red);
+  border-radius: 10px;
+  padding: 12px 14px;
+  margin-bottom: 10px;
+}
+.alert-perhatian {
+  background: rgba(243, 120, 31, 0.08);
+  border: 1px solid var(--accent);
+  border-radius: 10px;
+  padding: 12px 14px;
+  margin-bottom: 10px;
+}
+.alert-kritis strong { color: var(--red); }
+.alert-perhatian strong { color: var(--accent-dark); }
+
+.action-plan {
+  margin: 0 0 4px 20px;
+}
+.action-plan li {
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.value-box {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid var(--border);
+}
+.value-box .prob {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--accent-dark);
+}
+
+/* ---- Primary insight banner (temuan utama yang di-highlight) ---- */
+.primary-insight {
+  background: linear-gradient(135deg, rgba(243, 120, 31, 0.12), rgba(243, 120, 31, 0.04));
+  border: 2px solid var(--accent);
+  border-radius: 14px;
+  padding: 20px 22px;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 10px rgba(243, 120, 31, 0.12);
+}
+.primary-insight.warm {
+  background: linear-gradient(135deg, rgba(224, 123, 0, 0.16), rgba(243, 120, 31, 0.05));
+  border-color: var(--accent-dark);
+}
+.pi-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 8px;
+}
+.pi-tag {
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--accent-dark);
+}
+.pi-badge {
+  background: var(--accent);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 999px;
+  letter-spacing: 0.3px;
+}
+.pi-name {
+  font-size: 24px;
+  font-weight: 800;
+  line-height: 1.2;
+}
+.pi-role {
+  color: var(--accent);
+  font-weight: 600;
+  font-size: 18px;
+}
+.pi-reason {
+  color: var(--text);
+  font-size: 14px;
+  margin-top: 6px;
+}
+.pi-warm {
+  margin-top: 10px;
+  padding: 10px 12px;
+  background: rgba(255, 255, 255, 0.6);
+  border-left: 3px solid var(--accent-dark);
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+/* ---- Risk banner (hanya alert kritis, dinaikkan ke atas) ---- */
+.risk-banner {
+  background: rgba(214, 69, 69, 0.1);
+  border: 2px solid var(--red);
+  border-radius: 14px;
+  padding: 16px 20px;
+  margin-bottom: 16px;
+}
+.risk-banner strong {
+  color: var(--red);
+  font-size: 14px;
+  letter-spacing: 0.3px;
+}
+.risk-banner p {
+  font-size: 14px;
+  margin-top: 4px;
+}
+.risk-banner > div + div {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(214, 69, 69, 0.25);
+}
+
+/* ---- Kartu jalur terkuat yang di-highlight (shortest tetap tampil normal) ---- */
+.path-primary {
+  position: relative;
+  border: 2px solid var(--accent);
+  background: linear-gradient(135deg, rgba(243, 120, 31, 0.07), var(--panel) 60%);
+  box-shadow: 0 2px 10px rgba(243, 120, 31, 0.12);
+}
+.path-badge {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 999px;
+  letter-spacing: 0.3px;
+}

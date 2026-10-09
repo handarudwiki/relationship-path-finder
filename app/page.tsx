@@ -131,7 +131,42 @@ export default function Home() {
 
       {loading && <div className="loading">Membangun graph & mencari jalur…</div>}
 
-      {data && (
+      {data && (() => {
+        const dm = data.decisionMaker;
+        const eksplisit = !!dm && dm.bukti.length > 1;
+        const jalurHangat = data.catatan.some((c) => c.startsWith("TEMUAN KUNCI"));
+        const alertKritis = (data.alerts || []).filter((a) => a.level === "kritis");
+        return (
+        <>
+        {/* ========== PRIMARY INSIGHT — satu temuan utama yang di-highlight ========== */}
+        {dm && (
+          <div className={`primary-insight${jalurHangat ? " warm" : ""}`}>
+            <div className="pi-head">
+              <span className="pi-tag">{jalurHangat ? "🔥 Jalur Hangat" : "🎯 Decision Maker"}</span>
+              {eksplisit && <span className="pi-badge">Ditunjuk eksplisit di interaksi</span>}
+            </div>
+            <div className="pi-name">{dm.nama} <span className="pi-role">· {dm.jabatan}</span></div>
+            <p className="pi-reason">{dm.alasan}</p>
+            {jalurHangat && data.referensiPelanggan && (
+              <p className="pi-warm">
+                Relasi historis dengan pelanggan kami <strong>{data.referensiPelanggan.nama}</strong> — minta referensi langsung, ini bukan pendekatan dingin.
+              </p>
+            )}
+          </div>
+        )}
+
+        {/* ========== RISK ALERT KRITIS — dinaikkan, hanya level kritis ========== */}
+        {alertKritis.length > 0 && (
+          <div className="risk-banner">
+            {alertKritis.map((a, i) => (
+              <div key={i}>
+                <strong>🔴 RISK · {a.akunJembatan}</strong>
+                <p>{a.pesan}</p>
+              </div>
+            ))}
+          </div>
+        )}
+
         <div className="grid">
           <div className="card">
             <h2>Prospek</h2>
@@ -147,26 +182,20 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="card">
-            <h2>Decision Maker Terdeteksi</h2>
-            {data.decisionMaker ? (
-              <>
-                <div className="dm-name">{data.decisionMaker.nama}</div>
-                <div className="dm-role">{data.decisionMaker.jabatan}</div>
-                <p className="score" style={{ marginTop: 6 }}>{data.decisionMaker.alasan}</p>
-                <ul className="evidence">
-                  {data.decisionMaker.bukti.map((b, i) => (
-                    <li key={i}>{b}</li>
-                  ))}
-                </ul>
-              </>
-            ) : (
-              <p>Belum teridentifikasi — tidak ada kontak terdaftar.</p>
-            )}
-          </div>
+          {data.decisionMaker && data.decisionMaker.bukti.length > 0 && (
+            <div className="card">
+              <h2>Bukti Decision Maker</h2>
+              <ul className="evidence">
+                {data.decisionMaker.bukti.map((b, i) => (
+                  <li key={i}>{b}</li>
+                ))}
+              </ul>
+            </div>
+          )}
 
-          <div className="card">
-            <h2>Jalur Terkuat (paling bisa diandalkan)</h2>
+          <div className="card path-primary">
+            <h2>🛤️ Jalur Terkuat (paling bisa diandalkan)</h2>
+            <span className="path-badge">★ Direkomendasikan</span>
             <PathGraph path={data.strongest} title="Jalur terkuat" />
             <div style={{ marginTop: 12 }}>
               <PathView path={data.strongest} label="Jalur terkuat" />
@@ -181,6 +210,22 @@ export default function Home() {
             </div>
           </div>
 
+          {/* ALERT PERHATIAN (yang kritis sudah ditonjolkan di banner atas) */}
+          {data.alerts && data.alerts.some((a) => a.level === "perhatian") && (
+            <div className="card full">
+              <h2>⚠️ Perhatian Cross-Track (Sales × Support)</h2>
+              {data.alerts
+                .filter((a) => a.level === "perhatian")
+                .map((a, i) => (
+                  <div key={i} className="alert-perhatian">
+                    <strong>🟡 PERHATIAN · {a.akunJembatan}</strong>
+                    <p>{a.pesan}</p>
+                    <p className="score">Bukti — {a.bukti}</p>
+                  </div>
+                ))}
+            </div>
+          )}
+
           <div className="card full">
             <h2>Strategi Pendekatan</h2>
             {data.catatan.map((c, i) => (
@@ -194,6 +239,61 @@ export default function Home() {
             )}
           </div>
 
+          {/* RENCANA AKSI + NILAI HARAPAN */}
+          <div className="card full">
+            <h2>🎯 Rekomendasi &amp; Dampak Bisnis</h2>
+            <ol className="action-plan">
+              {data.rencanaAksi.map((s, i) => (
+                <li key={i}>{s}</li>
+              ))}
+            </ol>
+            {data.nilaiHarapan && (
+              <div className="value-box">
+                <div>
+                  <span className="score">Nilai deal</span>
+                  <div className="money">{rupiah(data.nilaiTahunan)}</div>
+                </div>
+                <div>
+                  <span className="score">Peluang menang</span>
+                  <div className="prob">
+                    {data.nilaiHarapan.persenTanpa}% → <strong>{data.nilaiHarapan.persenDengan}%</strong>
+                  </div>
+                </div>
+                <div>
+                  <span className="score">Nilai yang ditambahkan rekomendasi</span>
+                  <div className="money">{rupiah(data.nilaiHarapan.tambahan)}</div>
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* PRESEDEN DARI LOG KEPUTUSAN */}
+          {data.preseden && data.preseden.length > 0 && (
+            <div className="card full">
+              <h2>📑 Preseden dari Log Keputusan</h2>
+              <p className="score" style={{ marginBottom: 10 }}>
+                Keputusan serupa yang pernah disetujui — dasar agar rekomendasi realistis &amp; punya preseden.
+              </p>
+              <table className="data-table">
+                <thead>
+                  <tr><th>ID</th><th>Tipe</th><th>Nilai</th><th>Akun preseden</th><th>Disetujui oleh</th><th>Relevansi</th></tr>
+                </thead>
+                <tbody>
+                  {data.preseden.map((p, i) => (
+                    <tr key={i}>
+                      <td>{p.decisionId}</td>
+                      <td>{p.tipe}</td>
+                      <td>{p.nilai || "-"}</td>
+                      <td>{p.akunPreseden}</td>
+                      <td>{p.diputuskanOleh}</td>
+                      <td className="score">{p.relevansi}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
+
           <div className="card full">
             <h2>Draft Pesan Intro</h2>
             <textarea value={data.draftPesan} readOnly />
@@ -202,7 +302,9 @@ export default function Home() {
             </button>
           </div>
         </div>
-      )}
+        </>
+        );
+      })()}
 
       {/* ================= QUERY BEBAS (tahan pertanyaan dadakan juri) ============== */}
       <h2 className="section-title">🔎 Query Bebas — jalur antar siapa pun</h2>

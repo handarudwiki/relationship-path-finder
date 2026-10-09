@@ -190,6 +190,56 @@ export class ContextGraph {
       }
     }
 
+    // ---- LOG KEPUTUSAN (decision_log.csv) ----
+    // Node Keputusan + relasi MENYETUJUI (karyawan->keputusan) & DIDASARKAN_PADA (keputusan->akun).
+    // Ini sumber "preseden" untuk explainability dan rekomendasi.
+    for (const dec of d.decisions) {
+      const id = dec.decision_id;
+      if (!id) continue;
+      this.addNode(id, "keputusan" as any, `${dec.tipe} ${dec.keputusan}`, {
+        tipe_keputusan: dec.tipe,
+        keputusan: dec.keputusan,
+        nilai: dec.nilai,
+        alasan: dec.alasan,
+        tanggal: dec.tanggal,
+        account_id: dec.account_id,
+        diputuskan_oleh: dec.diputuskan_oleh,
+        fitur: dec.fitur_dijanjikan,
+        status_janji: dec.status_janji,
+      });
+      if (dec.account_id && this.nodes.has(dec.account_id)) {
+        this.addEdge(id, dec.account_id, "DIDASARKAN_PADA", 0.5, `Keputusan ${id} (${dec.tipe}) untuk akun`);
+      }
+      if (dec.diputuskan_oleh && this.nodes.has(dec.diputuskan_oleh)) {
+        this.addEdge(dec.diputuskan_oleh, id, "MENYETUJUI", 0.5, `${dec.diputuskan_oleh} memutuskan ${id}: ${dec.keputusan}`);
+      }
+    }
+
+    // ---- TIKET SUPPORT (support_tickets.csv) ----
+    // Diringkas jadi "kesehatan tiket" per akun (disimpan di props node akun),
+    // dipakai untuk Alert cross-track saat jalur melewati akun bermasalah.
+    const ticketAgg = new Map<string, { total: number; terbuka: number; kritisTinggi: number }>();
+    for (const t of d.tickets) {
+      const acc = t.account_id;
+      if (!acc) continue;
+      if (!ticketAgg.has(acc)) ticketAgg.set(acc, { total: 0, terbuka: 0, kritisTinggi: 0 });
+      const agg = ticketAgg.get(acc)!;
+      agg.total++;
+      const status = (t.status || "").toLowerCase();
+      const prioritas = (t.prioritas || "").toLowerCase();
+      const terbuka = status !== "selesai";
+      if (terbuka) agg.terbuka++;
+      if (terbuka && (prioritas === "kritis" || prioritas === "tinggi")) agg.kritisTinggi++;
+    }
+    for (const [acc, agg] of ticketAgg.entries()) {
+      const node = this.nodes.get(acc);
+      if (node) {
+        node.props.tiket_total = String(agg.total);
+        node.props.tiket_terbuka = String(agg.terbuka);
+        node.props.tiket_kritis_tinggi = String(agg.kritisTinggi);
+      }
+    }
+
     return this;
   }
 

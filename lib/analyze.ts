@@ -1,5 +1,5 @@
 import { getGraph, ContextGraph } from "./graph";
-import { DecisionMaker, ProspectAnalysis, PathResult } from "./types";
+import { DecisionMaker, ProspectAnalysis, PathResult, Precedent, CrossTrackAlert } from "./types";
 
 const HARGA_PER_OUTLET_BULAN = 350000;
 
@@ -293,6 +293,12 @@ export function analyzeProspect(accountId: string): ProspectAnalysis {
 
   const draftPesan = buildMessage(g, acc.label, dm, strongest, referensi, jalurHangat);
 
+  // Preseden dari log keputusan + alert cross-track + rencana aksi + nilai harapan
+  const preseden = findPrecedents(g, accountId);
+  const alerts = crossTrackAlerts(g, strongest, referensi);
+  const rencanaAksi = buildActionPlan(g, acc.label, dm, strongest, referensi, jalurHangat);
+  const nilaiHarapan = estimateValue(info.stage, info.nilai, jalurHangat);
+
   return {
     accountId,
     nama: acc.label,
@@ -304,6 +310,10 @@ export function analyzeProspect(accountId: string): ProspectAnalysis {
     shortest,
     strongest,
     referensiPelanggan: referensi,
+    preseden,
+    alerts,
+    rencanaAksi,
+    nilaiHarapan,
     draftPesan,
     catatan,
   };
@@ -521,4 +531,306 @@ export function crossTrackSignals(): CrossTrackSignal[] {
     }
   }
   return out;
+}
+
+// ===========================================================================
+// PRESEDEN (log keputusan), ALERT CROSS-TRACK, RENCANA AKSI, NILAI HARAPAN
+// ===========================================================================
+
+/**
+ * Cari preseden dari decision_log: keputusan masa lalu (diskon/pengecualian/janji)
+ * untuk akun pelanggan sejenis. Dipakai agar rekomendasi "ada dasarnya".
+ */
+function findPrecedents(g: ContextGraph, accountId: string): Precedent[] {
+  const prospek = g.nodes.get(accountId);
+  if (!prospek) return [];
+  const industri = (prospek.props.industri || "").toLowerCase();
+  const outletProspek = Number(prospek.props.jumlah_outlet || 0);
+
+  const out: Precedent[] = [];
+  for (const dec of g.raw.decisions) {
+    if (!dec.decision_id) continue;
+    if (dec.keputusan !== "Disetujui") continue; // preseden = yang pernah disetujui
+    const akunDec = g.nodes.get(dec.account_id);
+    const indDec = akunDec ? (akunDec.props.industri || "").toLowerCase() : "";
+    const outletDec = akunDec ? Number(akunDec.props.jumlah_outlet || 0) : 0;
+
+    // relevansi: industri mirip ATAU skala outlet mirip
+    const industriMirip = indDec && (indDec === industri || grup(indDec) === grup(industri));
+    const skalaMirip = outletDec > 0 && Math.abs(outletDec - outletProspek) <= 10;
+    if (!industriMirip && !skalaMirip) continue;
+
+    const alasanRel: string[] = [];
+    if (industriMirip) alasanRel.push(`industri sejenis (${akunDec?.props.industri})`);
+    if (skalaMirip) alasanRel.push(`skala outlet mirip (${outletDec} vs ${outletProspek})`);
+
+    out.push({
+      decisionId: dec.decision_id,
+      tipe: dec.tipe,
+      keputusan: dec.keputusan,
+      nilai: dec.nilai,
+      alasan: dec.alasan,
+      diputuskanOleh: namaKaryawan(g, dec.diputuskan_oleh),
+      tanggal: dec.tanggal,
+      akunPreseden: akunDec ? akunDec.label : dec.account_id,
+      relevansi: alasanRel.join(", ") || "tipe keputusan relevan",
+    });
+  }
+  // utamakan diskon (paling relevan untuk mempercepat deal), lalu terbaru
+  out.sort((a, b) => {
+    if (a.tipe === "diskon" && b.tipe !== "diskon") return -1;
+    if (b.tipe === "diskon" && a.tipe !== "diskon") return 1;
+    return b.tanggal.localeCompare(a.tanggal);
+  });
+  return out.slice(0, 4);
+}
+
+function grup(x: string): string {
+  x = x.toLowerCase();
+  const fnb = ["f&b", "resto", "hospitality", "bakery", "kafe", "cafe"];
+  const retail = ["ritel", "minimarket", "swalayan", "toko", "distributor", "grosir"];
+  if (fnb.some((k) => x.includes(k))) return "fnb";
+  if (retail.some((k) => x.includes(k))) return "retail";
+  return x;
+}
+
+function namaKaryawan(g: ContextGraph, empId: string): string {
+  const n = g.nodes.get(empId);
+  return n ? `${n.label} (${n.props.jabatan})` : empId;
+}
+
+/**
+ * ALERT CROSS-TRACK (Sales x Support): jika jalur hangat melewati akun pelanggan
+ * yang punya tiket kritis/tinggi terbuka, beri peringatan agar isu itu ditangani
+ * dulu sebelum memakai akun tersebut sebagai referensi.
+ */
+function crossTrackAlerts(
+  g: ContextGraph,
+  strongest: PathResult | null,
+  referensi: { accountId: string; nama: string } | null
+): CrossTrackAlert[] {
+  const alerts: CrossTrackAlert[] = [];
+  const akunDicek = new Set<string>();
+
+  // akun pelanggan yang muncul di jalur terkuat
+  if (strongest) {
+    for (const n of strongest.nodes) {
+      if (n.tipe === "akun" && n.props.tipe_akun === "pelanggan") akunDicek.add(n.id);
+    }
+  }
+  // akun referensi
+  if (referensi) akunDicek.add(referensi.accountId);
+
+  for (const accId of akunDicek) {
+    const node = g.nodes.get(accId);
+    if (!node) continue;
+    const kritisTinggi = Number(node.props.tiket_kritis_tinggi || 0);
+    const terbuka = Number(node.props.tiket_terbuka || 0);
+    const total = Number(node.props.tiket_total || 0);
+    if (kritisTinggi > 0) {
+      alerts.push({
+        level: "kritis",
+        akunJembatan: node.label,
+        pesan: `Akun jembatan ${node.label} punya ${kritisTinggi} tiket prioritas kritis/tinggi yang masih TERBUKA. Tangani dulu sebelum meminta ${node.label} jadi referensi — risiko reputasi.`,
+        bukti: `support_tickets.csv: ${terbuka} tiket terbuka (${kritisTinggi} kritis/tinggi) dari total ${total} tiket untuk ${node.label}.`,
+      });
+    } else if (total >= 20) {
+      alerts.push({
+        level: "perhatian",
+        akunJembatan: node.label,
+        pesan: `Akun jembatan ${node.label} punya volume tiket tinggi (${total}). Pastikan mereka puas sebelum dijadikan referensi.`,
+        bukti: `support_tickets.csv: total ${total} tiket untuk ${node.label}, ${terbuka} masih terbuka.`,
+      });
+    }
+  }
+  return alerts;
+}
+
+/** Rencana aksi 1-2-3 konkret berdasarkan jalur yang ditemukan. */
+function buildActionPlan(
+  g: ContextGraph,
+  prospekNama: string,
+  dm: DecisionMaker | null,
+  strongest: PathResult | null,
+  referensi: { nama: string } | null,
+  jalurHangat: boolean
+): string[] {
+  const steps: string[] = [];
+  if (!dm) {
+    steps.push("Riset stakeholder: identifikasi pengambil keputusan di akun (belum ada kontak terdaftar).");
+    if (referensi) steps.push(`Gunakan ${referensi.nama} (pelanggan sejenis) untuk membuka pintu perkenalan.`);
+    return steps;
+  }
+  if (strongest && strongest.nodes.length >= 3) {
+    const perantara = strongest.nodes.slice(1, -1).map((n) => n.label);
+    steps.push(`Hubungi ${perantara[0]} minggu ini — minta perkenalan menuju ${dm.nama} (${dm.jabatan}).`);
+    if (jalurHangat && referensi) {
+      steps.push(`Minta ${referensi.nama} memberi referensi/testimoni langsung ke ${dm.nama} (mereka punya hubungan historis).`);
+    }
+    steps.push(`Kirim draft pesan intro ke ${dm.nama} dalam 3 hari.`);
+  } else {
+    steps.push(`Dekati ${dm.nama} (${dm.jabatan}) langsung dengan draft pesan yang disiapkan.`);
+  }
+  steps.push(`Target: pindahkan deal ke tahap berikutnya dalam 2 minggu.`);
+  return steps;
+}
+
+/**
+ * Estimasi nilai yang DITAMBAHKAN rekomendasi (bukan nilai deal penuh).
+ * Peluang menang dinaikkan karena jalur hangat; asumsi transparan.
+ */
+function estimateValue(
+  stage: string,
+  nilaiTahunan: number,
+  jalurHangat: boolean
+): { persenTanpa: number; persenDengan: number; tambahan: number } | null {
+  if (!nilaiTahunan) return null;
+  // peluang dasar per stage (asumsi)
+  const base: Record<string, number> = {
+    Lead: 0.1,
+    Discovery: 0.2,
+    Demo: 0.3,
+    Proposal: 0.35,
+    Negosiasi: 0.5,
+  };
+  const persenTanpa = base[stage] ?? 0.25;
+  // jalur hangat menaikkan peluang
+  const persenDengan = Math.min(0.9, persenTanpa + (jalurHangat ? 0.3 : 0.1));
+  const tambahan = Math.round((persenDengan - persenTanpa) * nilaiTahunan);
+  return {
+    persenTanpa: Math.round(persenTanpa * 100),
+    persenDengan: Math.round(persenDengan * 100),
+    tambahan,
+  };
+}
+
+// ===========================================================================
+// SLACK — jawab /pathfinder <prospek/nama> dengan Block Kit
+// ===========================================================================
+
+function rupiahFmt(n: number): string {
+  return "Rp " + n.toLocaleString("id-ID");
+}
+
+/** Resolusi teks query -> account_id prospek. Terima "P01", nama, atau sebagian nama. */
+function resolveProspek(query: string): string | null {
+  const g = getGraph();
+  const q = query.trim().toLowerCase();
+  if (!q) return null;
+  // cocokkan langsung id
+  for (const n of g.nodes.values()) {
+    if (n.tipe === "akun" && n.props.tipe_akun === "prospek" && n.id.toLowerCase() === q) return n.id;
+  }
+  // cocokkan nama / sebagian nama
+  for (const n of g.nodes.values()) {
+    if (n.tipe === "akun" && n.props.tipe_akun === "prospek" && n.label.toLowerCase().includes(q)) return n.id;
+  }
+  return null;
+}
+
+/**
+ * Bangun respons Slack (Block Kit) untuk sebuah query prospek.
+ * Dipakai oleh endpoint slash command /pathfinder.
+ */
+export function slackResponseFor(query: string): any {
+  const accountId = resolveProspek(query);
+  if (!accountId) {
+    const g = getGraph();
+    const daftar = Array.from(g.nodes.values())
+      .filter((n) => n.tipe === "akun" && n.props.tipe_akun === "prospek")
+      .map((n) => `${n.id} (${n.label})`)
+      .join(", ");
+    return {
+      response_type: "ephemeral",
+      text: `Prospek "${query}" tidak ditemukan. Coba salah satu: ${daftar}`,
+    };
+  }
+
+  const a = analyzeProspect(accountId);
+  const dm = a.decisionMaker;
+  const strong = a.strongest;
+
+  const jalurText = strong
+    ? strong.nodes.map((n) => n.label).join("  →  ")
+    : "(tidak ada jalur)";
+
+  const buktiText = strong
+    ? strong.edges.map((e) => `• *${e.relasi}* (bobot ${e.bobot}) — ${e.bukti}`).join("\n")
+    : "-";
+
+  const aksiText = a.rencanaAksi.map((s, i) => `${i + 1}. ${s}`).join("\n");
+
+  const alertText =
+    a.alerts.length > 0
+      ? a.alerts
+          .map((al) => `${al.level === "kritis" ? "🔴" : "🟡"} *${al.akunJembatan}* — ${al.pesan}`)
+          .join("\n")
+      : null;
+
+  const nv = a.nilaiHarapan;
+  const nilaiText = nv
+    ? `Nilai deal *${rupiahFmt(a.nilaiTahunan)}* · peluang ${nv.persenTanpa}% → *${nv.persenDengan}%* · nilai ditambahkan *${rupiahFmt(nv.tambahan)}*`
+    : rupiahFmt(a.nilaiTahunan);
+
+  const presedenText =
+    a.preseden.length > 0
+      ? a.preseden
+          .slice(0, 2)
+          .map((p) => `• ${p.decisionId}: ${p.tipe} ${p.nilai} di ${p.akunPreseden} (disetujui ${p.diputuskanOleh})`)
+          .join("\n")
+      : "Belum ada preseden relevan.";
+
+  const blocks: any[] = [
+    {
+      type: "header",
+      text: { type: "plain_text", text: `🔗 Path Finder: ${a.nama}`, emoji: true },
+    },
+    {
+      type: "section",
+      fields: [
+        { type: "mrkdwn", text: `*Industri:*\n${a.industri}` },
+        { type: "mrkdwn", text: `*Stage:*\n${a.stage}` },
+        { type: "mrkdwn", text: `*Outlet:*\n${a.outlet}` },
+        { type: "mrkdwn", text: `*Nilai:*\n${rupiahFmt(a.nilaiTahunan)}` },
+      ],
+    },
+    { type: "divider" },
+    {
+      type: "section",
+      text: {
+        type: "mrkdwn",
+        text: dm
+          ? `*🎯 Decision Maker:* ${dm.nama} (${dm.jabatan})\n_${dm.alasan}_`
+          : "*Decision Maker:* belum teridentifikasi.",
+      },
+    },
+    {
+      type: "section",
+      text: { type: "mrkdwn", text: `*🛤️ Jalur terkuat:*\n${jalurText}` },
+    },
+    {
+      type: "section",
+      text: { type: "mrkdwn", text: `*Bukti:*\n${buktiText}` },
+    },
+  ];
+
+  if (alertText) {
+    blocks.push({ type: "divider" });
+    blocks.push({ type: "section", text: { type: "mrkdwn", text: `*⚠️ Alert Cross-Track:*\n${alertText}` } });
+  }
+
+  blocks.push({ type: "divider" });
+  blocks.push({ type: "section", text: { type: "mrkdwn", text: `*✅ Rekomendasi:*\n${aksiText}` } });
+  blocks.push({ type: "section", text: { type: "mrkdwn", text: `*💰 Dampak:*\n${nilaiText}` } });
+  blocks.push({ type: "section", text: { type: "mrkdwn", text: `*📑 Preseden keputusan:*\n${presedenText}` } });
+
+  if (a.draftPesan) {
+    blocks.push({ type: "divider" });
+    blocks.push({
+      type: "section",
+      text: { type: "mrkdwn", text: `*✉️ Draft pesan intro:*\n\`\`\`${a.draftPesan}\`\`\`` },
+    });
+  }
+
+  return { response_type: "in_channel", blocks };
 }
