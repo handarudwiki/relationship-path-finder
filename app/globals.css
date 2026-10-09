@@ -5,16 +5,17 @@
 }
 
 :root {
-  --bg: #0b1020;
-  --panel: #141b31;
-  --panel-2: #1c2541;
-  --border: #2a3356;
-  --text: #e8ecf7;
-  --muted: #9aa6c7;
-  --accent: #6ea8fe;
-  --green: #3ddc97;
-  --amber: #ffcf56;
-  --red: #ff6b6b;
+  --bg: #fdf7f2;          /* putih hangat */
+  --panel: #ffffff;        /* kartu putih */
+  --panel-2: #fff4ea;      /* panel sekunder krem oranye */
+  --border: #f0d6bf;       /* garis tepi oranye lembut */
+  --text: #2a2320;         /* teks gelap */
+  --muted: #8a7b6e;        /* teks sekunder */
+  --accent: #f3781f;       /* oranye utama */
+  --accent-dark: #d4620c;  /* oranye tua untuk hover/teks aksen */
+  --green: #e07b00;        /* "nilai/positif" dibuat senada oranye-amber */
+  --amber: #c2410c;        /* oranye kemerahan */
+  --red: #d64545;
 }
 
 html,
@@ -79,9 +80,12 @@ button {
 
 button.primary {
   background: var(--accent);
-  color: #06122b;
+  color: #ffffff;
   font-weight: 600;
   border: none;
+}
+button.primary:hover {
+  background: var(--accent-dark);
 }
 
 button:disabled {
@@ -106,6 +110,7 @@ button:disabled {
   border: 1px solid var(--border);
   border-radius: 12px;
   padding: 18px;
+  box-shadow: 0 1px 3px rgba(180, 120, 60, 0.08);
 }
 
 .card h2 {
@@ -169,7 +174,7 @@ button:disabled {
   white-space: nowrap;
 }
 
-.node-pill.akun { border-color: #4a6; }
+.node-pill.akun { border-color: var(--green); }
 .node-pill.kontak { border-color: var(--accent); }
 .node-pill.karyawan { border-color: var(--amber); }
 
@@ -199,8 +204,8 @@ button:disabled {
 }
 
 .key-finding {
-  background: rgba(61, 220, 151, 0.1);
-  border: 1px solid var(--green);
+  background: rgba(243, 120, 31, 0.1);
+  border: 1px solid var(--accent);
   border-radius: 10px;
   padding: 12px 14px;
   margin-top: 12px;
@@ -278,13 +283,13 @@ textarea {
 }
 .hit:first-of-type { border-top: 1px solid var(--border); margin-top: 4px; border-radius: 8px 8px 0 0; }
 .hit:last-of-type { border-radius: 0 0 8px 8px; }
-.hit:hover { background: #243055; }
+.hit:hover { background: #ffe8d4; }
 
 .selected-node {
   margin-top: 8px;
   padding: 8px 12px;
-  background: rgba(61, 220, 151, 0.12);
-  border: 1px solid var(--green);
+  background: rgba(243, 120, 31, 0.12);
+  border: 1px solid var(--accent);
   border-radius: 8px;
   font-weight: 600;
 }
@@ -315,4 +320,103 @@ textarea {
   color: var(--muted);
   font-size: 13px;
   text-align: center;
+}
+
+/* ---- Explore Graph page ---- */
+.nav-link {
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 14px;
+  border: 1px solid var(--accent);
+  border-radius: 8px;
+  padding: 6px 12px;
+  transition: all 0.15s;
+}
+.nav-link:hover {
+  background: var(--accent);
+  color: #fff;
+}
+
+.rel-filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+.rel-filter button {
+  font-size: 11px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  letter-spacing: 0.3px;
+  font-weight: 600;
+}
+.rel-on {
+  background: var(--accent);
+  color: #fff;
+  border: 1px solid var(--accent);
+}
+.rel-off {
+  background: var(--panel-2);
+  color: var(--muted);
+  border: 1px solid var(--border);
+}
+
+.graph-meta {
+  font-size: 13px;
+  color: var(--text);
+  margin-bottom: 10px;
+}
+.graph-meta .muted {
+  color: var(--muted);
+}
+
+.graph-canvas {
+  position: relative;
+  background: #fffaf4;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: grab;
+  user-select: none;
+}
+.graph-canvas:active {
+  cursor: grabbing;
+}
+
+.graph-tooltip {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: #fff;
+  border: 1px solid var(--accent);
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 13px;
+  box-shadow: 0 2px 8px rgba(180, 120, 60, 0.15);
+  pointer-events: none;
+}
+.graph-tooltip .muted {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.legend {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-top: 14px;
+  font-size: 13px;
+  color: var(--text);
+}
+.legend span {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+.legend i {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  display: inline-block;
 }

@@ -109,6 +109,7 @@ export default function Home() {
       <header className="top">
         <h1>🔗 Relationship Path Finder</h1>
         <span className="chip">PT KasirNusa · Sales Track</span>
+        <a href="/explore" className="nav-link">🕸️ Explore Graph →</a>
       </header>
       <p className="subtitle">
         Lewat siapa jalur terbaik menuju decision maker? Context graph lintas 5 sumber data, dengan jalur bukti.
@@ -167,7 +168,7 @@ export default function Home() {
           <div className="card">
             <h2>Jalur Terkuat (paling bisa diandalkan)</h2>
             <PathGraph path={data.strongest} title="Jalur terkuat" />
-            <div style={{ marginTop: 10 }}>
+            <div style={{ marginTop: 12 }}>
               <PathView path={data.strongest} label="Jalur terkuat" />
             </div>
           </div>
@@ -175,7 +176,7 @@ export default function Home() {
           <div className="card">
             <h2>Jalur Terpendek (paling sedikit perantara)</h2>
             <PathGraph path={data.shortest} title="Jalur terpendek" />
-            <div style={{ marginTop: 10 }}>
+            <div style={{ marginTop: 12 }}>
               <PathView path={data.shortest} label="Jalur terpendek" />
             </div>
           </div>
@@ -256,10 +257,21 @@ export default function Home() {
         </button>
 
         {freeResult && freeResult.adaJalur && (
-          <div style={{ marginTop: 16 }}>
-            <h3 style={{ color: "var(--accent)", marginBottom: 8 }}>Jalur terkuat</h3>
-            <PathGraph path={freeResult.strongest} title="Jalur terkuat" />
-            <PathView path={freeResult.strongest} label="Terkuat" />
+          <div className="grid" style={{ marginTop: 16 }}>
+            <div>
+              <h3 style={{ color: "var(--accent)", marginBottom: 8 }}>Jalur Terkuat (paling bisa diandalkan)</h3>
+              <PathGraph path={freeResult.strongest} title="Jalur terkuat" />
+              <div style={{ marginTop: 12 }}>
+                <PathView path={freeResult.strongest} label="Terkuat" />
+              </div>
+            </div>
+            <div>
+              <h3 style={{ color: "var(--accent)", marginBottom: 8 }}>Jalur Terpendek (paling sedikit perantara)</h3>
+              <PathGraph path={freeResult.shortest} title="Jalur terpendek" />
+              <div style={{ marginTop: 12 }}>
+                <PathView path={freeResult.shortest} label="Terpendek" />
+              </div>
+            </div>
           </div>
         )}
         {freeResult && !freeResult.adaJalur && (
