@@ -4,3 +4,7 @@ out
 .DS_Store
 *.log
 .claude
+
+# berisi API key, jangan di-commit
+.env
+.env*.local

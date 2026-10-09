@@ -3,6 +3,8 @@
 import { useEffect, useState } from "react";
 import type { ProspectAnalysis, PathResult, GraphNode } from "@/lib/types";
 import PathGraph from "./PathGraph";
+import MagicRecommendation from "./MagicRecommendation";
+import DraftPesanAI from "./DraftPesanAI";
 
 function rupiah(n: number): string {
   return "Rp " + n.toLocaleString("id-ID");
@@ -28,7 +30,13 @@ function PathView({ path, label }: { path: PathResult | null; label: string }) {
             {i < path.edges.length && (
               <div className="rel">
                 <span className="relname">↳ {path.edges[i].relasi} (bobot {path.edges[i].bobot})</span>
-                <span className="bukti">{path.edges[i].bukti}</span>
+                <span className="bukti">{path.edges[i].keterangan}</span>
+                {path.edges[i].konteksAkun?.map((k) => (
+                  <span key={k.akun} className="konteks-akun">
+                    via {k.akun}: {n.label} <span className="relname">{k.relasiDari.join(", ")}</span> →{" "}
+                    {path.nodes[i + 1].label} <span className="relname">{k.relasiKe.join(", ")}</span>
+                  </span>
+                ))}
               </div>
             )}
           </div>
@@ -50,7 +58,6 @@ export default function Home() {
   const [selected, setSelected] = useState<string>("P01");
   const [data, setData] = useState<ProspectAnalysis | null>(null);
   const [loading, setLoading] = useState(false);
-  const [copied, setCopied] = useState(false);
 
   // free-form query
   const [qFrom, setQFrom] = useState("");
@@ -78,14 +85,6 @@ export default function Home() {
     const d = await r.json();
     setData(d);
     setLoading(false);
-  }
-
-  function copyMsg() {
-    if (data?.draftPesan) {
-      navigator.clipboard.writeText(data.draftPesan);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 1500);
-    }
   }
 
   async function doSearch(q: string, which: "from" | "to") {
@@ -182,24 +181,13 @@ export default function Home() {
           </div>
 
           <div className="card full">
-            <h2>Strategi Pendekatan</h2>
-            {data.catatan.map((c, i) => (
-              <div key={i} className="key-finding">💡 {c}</div>
-            ))}
-            {data.referensiPelanggan && (
-              <div style={{ marginTop: 12 }}>
-                <strong>Referensi pelanggan yang disarankan:</strong> {data.referensiPelanggan.nama}
-                <p className="score">{data.referensiPelanggan.alasan}</p>
-              </div>
-            )}
+            <h2>✨ Magic Recommendation</h2>
+            <MagicRecommendation accountId={data.accountId} catatan={data.catatan} referensi={data.referensiPelanggan} />
           </div>
 
           <div className="card full">
-            <h2>Draft Pesan Intro</h2>
-            <textarea value={data.draftPesan} readOnly />
-            <button className="primary copy-btn" onClick={copyMsg}>
-              {copied ? "Tersalin ✓" : "Salin pesan"}
-            </button>
+            <h2>✨ Draft Pesan Intro</h2>
+            <DraftPesanAI accountId={data.accountId} cadangan={data.draftPesan} />
           </div>
         </div>
       )}

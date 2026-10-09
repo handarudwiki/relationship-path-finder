@@ -19,7 +19,8 @@ function truncate(s: string, max: number): string {
 
 /**
  * Visualisasi jalur sebagai node-link graph vertikal (SVG murni, tanpa dependency).
- * Node tersusun atas-ke-bawah; tiap sambungan menampilkan nama relasi + bobot.
+ * Node tersusun atas-ke-bawah; tiap sambungan menampilkan nama relasi + bobot,
+ * plus akun yang menghubungkan kedua orang (mis. ACCOUNT_OWNER → CHAMPION_DARI) bila ada.
  */
 export default function PathGraph({ path, title }: { path: PathResult | null; title: string }) {
   if (!path || path.nodes.length === 0) {
@@ -29,12 +30,14 @@ export default function PathGraph({ path, title }: { path: PathResult | null; ti
   const n = path.nodes.length;
   const nodeW = 230;
   const nodeH = 56;
-  const gapY = 64; // ruang untuk label relasi antar node
+  const adaKonteks = path.edges.some((e) => e.konteksAkun?.length);
+  const gapY = adaKonteks ? 96 : 64; // ruang untuk label relasi antar node
+  const labelW = adaKonteks ? 232 : nodeW / 2 - 2;
   const padX = 24;
   const padY = 18;
-  const width = padX * 2 + nodeW;
-  const height = padY * 2 + n * nodeH + (n - 1) * gapY;
   const cx = padX + nodeW / 2;
+  const width = Math.max(padX * 2 + nodeW, cx + 8 + labelW + 12);
+  const height = padY * 2 + n * nodeH + (n - 1) * gapY;
 
   const yOf = (i: number) => padY + i * (nodeH + gapY);
 
@@ -61,6 +64,9 @@ export default function PathGraph({ path, title }: { path: PathResult | null; ti
           const y2 = yOf(i + 1);
           const midY = (y1 + y2) / 2;
           const strong = e.bobot >= 0.8;
+          const k = e.konteksAkun?.[0];
+          const labelH = k ? 66 : 34;
+          const top = midY - labelH / 2;
           return (
             <g key={`e${i}`}>
               <line
@@ -73,21 +79,24 @@ export default function PathGraph({ path, title }: { path: PathResult | null; ti
                 strokeDasharray={e.bobot < 0.5 ? "5 4" : undefined}
                 markerEnd="url(#arrow-down)"
               />
-              <rect
-                x={cx + 8}
-                y={midY - 17}
-                width={nodeW / 2 - 2}
-                height={34}
-                rx={7}
-                fill="#fff"
-                stroke="#f0d6bf"
-              />
-              <text x={cx + 16} y={midY - 3} fontSize="11" fill="#d4620c" fontWeight={700}>
+              <rect x={cx + 8} y={top} width={labelW} height={labelH} rx={7} fill="#fff" stroke="#f0d6bf" />
+              <text x={cx + 16} y={top + 14} fontSize="11" fill="#d4620c" fontWeight={700}>
                 {truncate(e.relasi, 16)}
               </text>
-              <text x={cx + 16} y={midY + 12} fontSize="10" fill="#8a7b6e">
+              <text x={cx + 16} y={top + 29} fontSize="10" fill="#8a7b6e">
                 bobot {e.bobot}
               </text>
+              {k && (
+                <>
+                  <text x={cx + 16} y={top + 45} fontSize="10" fill="#8a7b6e">
+                    {truncate(`via ${k.akun}`, 36)}
+                    {e.konteksAkun!.length > 1 ? ` (+${e.konteksAkun!.length - 1})` : ""}
+                  </text>
+                  <text x={cx + 16} y={top + 59} fontSize="10" fill="#d4620c" fontWeight={700}>
+                    {truncate(`${k.relasiDari[0]} → ${k.relasiKe[0]}`, 36)}
+                  </text>
+                </>
+              )}
             </g>
           );
         })}

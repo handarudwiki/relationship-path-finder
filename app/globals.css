@@ -420,3 +420,58 @@ textarea {
   border-radius: 50%;
   display: inline-block;
 }
+
+/* ---- Magic Recommendation ---- */
+.magic-head { margin-bottom: 12px; }
+.magic-loading {
+  padding: 28px;
+  text-align: center;
+  color: var(--muted);
+  background: var(--panel-2);
+  border: 1px dashed var(--border);
+  border-radius: 10px;
+}
+.magic-error { margin-bottom: 8px; font-size: 14px; }
+.magic-ringkasan {
+  background: rgba(243, 120, 31, 0.1);
+  border: 1px solid var(--accent);
+  border-radius: 10px;
+  padding: 12px 14px;
+  font-size: 15px;
+}
+.magic-section { margin-top: 18px; }
+.magic-section h3 {
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--accent-dark);
+  margin-bottom: 8px;
+}
+.magic-meta {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 4px 12px;
+  font-size: 14px;
+}
+.magic-meta dt { color: var(--muted); }
+.magic-meta dd { font-weight: 600; }
+.magic-text { font-size: 14px; margin-top: 4px; }
+.magic-list {
+  padding-left: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.bukti-list { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 6px; }
+.bukti-chip {
+  font-size: 11px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  background: var(--panel-2);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 1px 6px;
+  color: var(--accent-dark);
+}
+.magic-foot { margin-top: 16px; }
+.magic-pesan { min-height: 340px; margin-top: 12px; line-height: 1.55; }
+.rel .konteks-akun { color: var(--text); margin-top: 2px; }

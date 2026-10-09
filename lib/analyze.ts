@@ -271,7 +271,7 @@ export function analyzeProspect(accountId: string): ProspectAnalysis {
       "Belum ada kontak terdaftar di akun ini — perlu riset stakeholder dulu. Mulai dari referensi industri sejenis di bawah untuk membuka pintu."
     );
   }
-  if (dm && dm.bukti.length > 1) {
+  if (dm && dm.alasan.startsWith("Ditunjuk secara eksplisit")) {
     catatan.push("Ada sinyal eksplisit di interaksi bahwa keputusan ada di tangan kontak ini.");
   }
 

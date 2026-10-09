@@ -79,6 +79,9 @@ export interface RawData {
   deals: Record<string, string>[];
   employees: Record<string, string>[];
   interactions: Record<string, any>[];
+  decisions: Record<string, string>[];
+  features: Record<string, string>[];
+  contracts: Record<string, string>[];
 }
 
 let cache: RawData | null = null;
@@ -92,6 +95,9 @@ export function loadData(): RawData {
     deals: readCSV("crm_deals.csv"),
     employees: readCSV("employees.csv"),
     interactions: readJSONL("interactions.jsonl"),
+    decisions: readCSV("decision_log.csv"),
+    features: readCSV("features.csv"),
+    contracts: readCSV("contracts_billing.csv"),
   };
   return cache;
 }

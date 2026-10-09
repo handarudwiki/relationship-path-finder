@@ -1,0 +1,111 @@
+{
+  "P01": {
+    "sidikJari": "ae9ea3c4654aa307",
+    "hasil": {
+      "accountId": "P01",
+      "pesan": {
+        "dari": "Sari Puspita (KasirNusa, Account Manager)",
+        "kepada": "Rina Hapsari (GM Operations, Grup Ritel Mandala)",
+        "saluran": "Email",
+        "subjek": "Silaturahmi dan perkenalan untuk Grup Ritel Mandala",
+        "isi": "Bu Rina, selamat bergabung di Grup Ritel Mandala. Saya Sari Puspita dari KasirNusa; kita pernah bertemu dalam sesi review kuartalan pada Januari 2026 saat Ibu masih di Kopi Lintas Nusantara.\n\nSaya menghubungi Ibu secara personal, bukan untuk mengirim proposal ulang. Kami ingin mendengar langsung kebutuhan operasional 60 gerai Mandala sebelum membahas apa pun. Untuk itu, saya ingin memperkenalkan Bagus Prakoso, yang akan menjadi penanggung jawab kerja sama ini dari sisi kami.\n\nSatu hal yang ingin saya sampaikan terbuka: integrasi akuntansi yang dulu Ibu tunggu masih dalam pengembangan dan belum punya tanggal pasti. Saya tidak ingin Ibu menerima janji yang sama dua kali, jadi saya sampaikan lebih dulu.\n\nBila berkenan, boleh kita atur panggilan singkat 20 menit? Saya dan Bagus akan menyesuaikan waktu Ibu.",
+        "bukti": [
+          "I0107",
+          "I0343",
+          "I0223",
+          "I0224",
+          "I0290",
+          "FEAT-07"
+        ]
+      },
+      "model": "deepseek/deepseek-v4.1-flash",
+      "dibuat": "2026-10-09T23:21:08.761Z"
+    }
+  },
+  "P02": {
+    "sidikJari": "03b800064b48146e",
+    "hasil": {
+      "accountId": "P02",
+      "pesan": {
+        "dari": "Citra Ayuningtyas (KasirNusa, Sales Executive)",
+        "kepada": "Teddy Kurniawan (Pemilik, Teras Kafe Group)",
+        "saluran": "Email",
+        "subjek": "Tindak lanjut demo Teras Kafe Group — opsi paket bertahap",
+        "isi": "Pak Teddy, terima kasih atas waktu Bapak pada demo Teras Kafe Group di Agustus 2026 dan diskusi kita soal POS serta stok bahan baku untuk kafe di Malang dan Batu. Saya memahami harga menjadi pertimbangan utama Bapak.\n\nSebagai alternatif, saya ingin menawarkan paket bertahap: kita mulai dari sebagian outlet lebih dulu, lalu paket dinaikkan setelah Bapak puas dengan hasilnya. Pendekatan ini sudah dipakai pelanggan F&B kami, Kafe Senja, yang kini memakai KasirNusa dan merasa puas. Bila Bapak berkenan, saya juga bisa mengatur perkenalan dengan mereka setelah mereka menyetujui.\n\nSaya juga ingin mengajak Bapak melihat langsung manajemen stok multi-gudang dan dashboard multi-outlet dalam sesi lanjutan, karena keduanya sudah tersedia dan relevan untuk operasional 15 kafe.\n\nApakah Bapak bersedia menjadwalkan panggilan singkat 20 menit minggu depan?",
+        "bukti": [
+          "I0269",
+          "I0296",
+          "I0322",
+          "DL-002",
+          "DL-007",
+          "D-2025-06",
+          "FEAT-02",
+          "FEAT-06"
+        ]
+      },
+      "model": "deepseek/deepseek-v4.1-flash",
+      "dibuat": "2026-10-09T23:21:11.401Z"
+    }
+  },
+  "P03": {
+    "sidikJari": "cffe483052dd2fff",
+    "hasil": {
+      "accountId": "P03",
+      "pesan": {
+        "dari": "Doni Saputra",
+        "kepada": "Ratna Dewi",
+        "saluran": "Email",
+        "subjek": "Referensi apotek KasirNusa dan modul apotek untuk Klinik Pratama Medika",
+        "isi": "Bu Ratna, terima kasih atas waktu diskusi kita pada September 2026. Menjawab permintaan Ibu, saya siapkan dua referensi pengguna KasirNusa dari industri apotek: Apotek Bunda Sehat (10 outlet) dan Apotek Medika Farma (15 outlet). Saya juga lampirkan ringkasan modul apotek KasirNusa untuk alur resep dan batch obat, yang sudah tersedia, agar kebutuhan 9 klinik dan apotek Ibu bisa tergambar lebih jelas.\n\nKalau berkenan, boleh saya kirimkan profil singkatnya lebih dulu? Setelah Ibu menilai relevan, saya akan mengatur perkenalan dengan kedua apotek tersebut begitu mereka bersedia.\n\nSaya juga berharap bisa berdiskusi langsung dengan Hanif Maulana sebagai Direktur Klinik, agar kebutuhan apotek dan klinik dibahas menyeluruh. Apakah Ibu dapat memperkenalkan saya kepada beliau? Saya siap mengikuti panggilan singkat 20 menit sesuai waktu Ibu.",
+        "bukti": [
+          "I0334",
+          "FEAT-05",
+          "C17",
+          "C09"
+        ]
+      },
+      "model": "deepseek/deepseek-v4.1-flash",
+      "dibuat": "2026-10-09T23:21:13.245Z"
+    }
+  },
+  "P04": {
+    "sidikJari": "681e4dfad857e673",
+    "hasil": {
+      "accountId": "P04",
+      "pesan": {
+        "dari": "Bagus Prakoso (KasirNusa, Sales Executive)",
+        "kepada": "Yuli Astuti (Purchasing Manager, Nirwana Hotel & Resto)",
+        "saluran": "Email",
+        "subjek": "Bahan referensi pengguna untuk Direktur Utama",
+        "isi": "Bu Yuli, terima kasih atas kabar terakhir soal status pengadaan pada September 2026. Saya memahami permintaan Direktur Utama untuk melihat rekomendasi dari pengguna yang mirip sebelum tanda tangan.\n\nSebagai bahan yang bisa Ibu teruskan, kami punya pengguna KasirNusa di industri sejenis, Saiyo Group, dengan 30 outlet. Skalanya tidak jauh dari 35 outlet Nirwana, sehingga pengalamannya relevan untuk dijadikan gambaran. Saya siap menyiapkan ringkasan singkatnya untuk Direktur Utama.\n\nJika berkenan, boleh kita atur panggilan singkat 20 menit bersama Ibu untuk menyepakati tanggal sesi referensi tersebut? Setelah itu saya bantu jembatani perkenalannya, tentu setelah pengguna terkait menyatakan kesediaan.\n\nTerima kasih, Bu Yuli.",
+        "bukti": [
+          "I0335",
+          "I0314",
+          "I0284",
+          "C06"
+        ]
+      },
+      "model": "deepseek/deepseek-v4.1-flash",
+      "dibuat": "2026-10-09T23:21:15.098Z"
+    }
+  },
+  "P05": {
+    "sidikJari": "03eaeb010a8ccf4f",
+    "hasil": {
+      "accountId": "P05",
+      "pesan": {
+        "dari": "Citra Ayuningtyas (KasirNusa, Sales Executive)",
+        "kepada": "Agus Salim (Operations Manager, Minimarket Berkah)",
+        "saluran": "Email",
+        "subjek": "Minta bantuan perkenalan ke PT Distribusi Sumber Rejeki",
+        "isi": "Selamat pagi, Bapak/Ibu Agus Salim.\n\nSaya Citra Ayuningtyas dari KasirNusa. Saya menangani calon pelanggan baru, PT Distribusi Sumber Rejeki, sebuah perusahaan distributor yang belum memiliki kontak di sisi kami.\n\nKami ingin memperkenalkan KasirNusa kepada mereka, dan saya membayangkan pengalaman Minimarket Berkah sebagai pengguna KasirNusa di industri sejenis bisa menjadi rujukan yang meyakinkan. Karena itu, saya ingin bertanya apakah Bapak/Ibu berkenan membantu menunjukkan siapa pengambil keputusan yang tepat di PT Distribusi Sumber Rejeki. Permintaan ini murni untuk perkenalan, bukan untuk meminta data internal mereka.\n\nJika nanti Bapak/Ibu bersedia, kami juga akan mengajukan permohonan resmi agar Minimarket Berkah dapat disebut sebagai referensi industri. Kami tidak akan menyebut nama Minimarket Berkah sebelum ada persetujuan dari Bapak/Ibu dan Ibu Lina Marlina.\n\nApakah Bapak/Ibu berkenan berdiskusi singkat 20 menit minggu ini? Saya siap menyesuaikan waktu Bapak/Ibu.\n\nTerima kasih atas perhatiannya.\n\nSalam,\nCitra Ayuningtyas\nKasirNusa",
+        "bukti": [
+          "I0271",
+          "C05"
+        ]
+      },
+      "model": "deepseek/deepseek-v4.1-flash",
+      "dibuat": "2026-10-09T23:21:17.953Z"
+    }
+  }
+}

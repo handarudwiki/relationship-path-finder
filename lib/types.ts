@@ -7,12 +7,21 @@ export interface GraphNode {
   props: Record<string, string>;
 }
 
+/** Akun yang menghubungkan dua orang di satu langkah jalur, mis. account owner & champion akun yang sama. */
+export interface KonteksAkun {
+  akun: string;
+  relasiDari: string[]; // relasi orang di awal langkah ke akun ini
+  relasiKe: string[]; // relasi orang di akhir langkah ke akun ini
+}
+
 export interface GraphEdge {
   from: string;
   to: string;
   relasi: string;
   bobot: number; // kekuatan relasi 0..1
-  bukti: string;
+  bukti: string; // lengkap dengan ID sumber, untuk konteks AI
+  keterangan: string; // bukti tanpa ID/kode, untuk ditampilkan di UI
+  konteksAkun?: KonteksAkun[]; // hanya di jalur, untuk langkah antar-orang
 }
 
 export interface PathResult {

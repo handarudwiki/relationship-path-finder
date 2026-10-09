@@ -6,7 +6,7 @@ export default function ExplorePage() {
     <div className="container">
       <header className="top">
         <h1>🕸️ Explore Context Graph</h1>
-        <span className="chip">215 node · 1.141 relasi</span>
+        <span className="chip">215 node · 757 relasi</span>
         <Link href="/" className="nav-link">← Kembali ke Path Finder</Link>
       </header>
       <p className="subtitle">

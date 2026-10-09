@@ -1,0 +1,512 @@
+{
+  "P03": {
+    "sidikJari": "d0bd8f2c50dbbf59",
+    "hasil": {
+      "accountId": "P03",
+      "rekomendasi": {
+        "ringkasan": "P03 Klinik Pratama Medika adalah prospek 9 outlet klinik dan apotek yang sudah masuk Discovery sejak 2026-09-21 dan secara eksplisit meminta referensi pelanggan apotek. Strategi minggu ini adalah memakai Ratna Dewi (Kepala Apotek) sebagai perantara hangat ke Hanif Maulana (Direktur Klinik), sambil memasok referensi apotek sehat dan membuktikan modul apotek yang sudah rilis.",
+        "pendekatan": {
+          "pemimpin": "Doni Saputra (Sales Executive)",
+          "perantara": "Ratna Dewi (Kepala Apotek, Klinik Pratama Medika)",
+          "alasan": "Ratna Dewi adalah satu-satunya kontak yang sudah berinteraksi dengan KasirNusa lewat I0334 dan punya relasi saling kenal dengan Hanif Maulana sebagai rekan kerja sejak 2021. Hanif Maulana tidak punya riwayat bekerja di pelanggan KasirNusa, jadi pendekatan tidak bisa dibangun dari pengalamannya sendiri dan harus lewat jalur Ratna Dewi."
+        },
+        "langkah": [
+          {
+            "judul": "Kirim paket referensi apotek ke Ratna Dewi",
+            "detail": "Doni Saputra mengirimkan profil singkat C17 Apotek Bunda Sehat dan C09 Apotek Medika Farma sebagai referensi apotek sehat, langsung menjawab permintaan di I0334. Sertakan ringkasan modul apotek (FEAT-05) yang sudah rilis agar permintaan referensi dan kebutuhan modul terjawab sekaligus.",
+            "bukti": [
+              "I0334",
+              "FEAT-05",
+              "C17",
+              "C09"
+            ]
+          },
+          {
+            "judul": "Minta Ratna Dewi membuka pintu ke Hanif Maulana",
+            "detail": "Doni Saputra meminta Ratna Dewi memperkenalkan dirinya ke Hanif Maulana sebagai Direktur Klinik, memanfaatkan relasi saling kenal mereka sebagai rekan kerja di Klinik Pratama Medika. Tujuannya agar sesi discovery lanjutan dihadiri pengambil keputusan, bukan hanya Kepala Apotek.",
+            "bukti": [
+              "I0334",
+              "P03"
+            ]
+          },
+          {
+            "judul": "Susun demo khusus alur apotek 9 outlet",
+            "detail": "Doni Saputra menyiapkan demo yang menonjolkan modul apotek (FEAT-05) dan manajemen stok multi-gudang (FEAT-02) untuk konteks 9 outlet klinik dan apotek. Fokuskan pada alur resep dan batch obat karena itu kebutuhan yang disebut Ratna Dewi di I0334.",
+            "bukti": [
+              "I0334",
+              "FEAT-05",
+              "FEAT-02"
+            ]
+          },
+          {
+            "judul": "Petakan kebutuhan integrasi akuntansi sejak awal",
+            "detail": "Doni Saputra menanyakan langsung ke Hanif Maulana apakah integrasi akuntansi (FEAT-07) termasuk kriteria keputusan, karena statusnya masih dalam pengembangan tanpa target. Jika ya, sampaikan status apa adanya agar tidak muncul janji fitur yang belum ditepati.",
+            "bukti": [
+              "FEAT-07",
+              "P03"
+            ]
+          },
+          {
+            "judul": "Siapkan kerangka diskon sebelum negosiasi harga",
+            "detail": "Doni Saputra menyiapkan skenario diskon di kisaran 10-15 persen dengan justifikasi nilai kontrak Rp37.800.000 per tahun, mengacu pada pola persetujuan diskon yang ada. Hindari mengajukan di atas 17 persen karena pola data menunjukkan pengajuan 17-25 persen ditolak.",
+            "bukti": [
+              "D-2026-06",
+              "D-2025-11",
+              "D-2026-10",
+              "P03"
+            ]
+          }
+        ],
+        "referensi": {
+          "akun": "C17 Apotek Bunda Sehat",
+          "alasan": "C17 adalah pelanggan apotek dengan health Hijau dan NPS 10, paling dekat dengan skala 9 outlet P03 dibanding kandidat lain. C09 Apotek Medika Farma bisa menjadi referensi kedua karena health Hijau dan NPS 9, meski skalanya 15 outlet sehingga lebih besar dari P03.",
+          "bukti": [
+            "C17",
+            "C09",
+            "P03"
+          ]
+        },
+        "risiko": [
+          {
+            "risiko": "Permintaan referensi apotek dari Ratna Dewi di I0334 bisa tidak terpenuhi jika referensi yang dikirim tidak relevan dengan skala 9 outlet. Mitigasi: prioritaskan C17 Apotek Bunda Sehat yang skalanya 10 outlet dan health Hijau, lalu tawarkan C09 sebagai pembanding.",
+            "mitigasi": "Prioritaskan C17 Apotek Bunda Sehat yang skalanya 10 outlet dan health Hijau, lalu tawarkan C09 sebagai pembanding.",
+            "bukti": [
+              "I0334",
+              "C17",
+              "C09"
+            ]
+          },
+          {
+            "risiko": "Menjanjikan integrasi akuntansi (FEAT-07) yang masih dalam pengembangan tanpa target bisa menjadi janji fitur yang belum ditepati. Mitigasi: sampaikan status FEAT-07 apa adanya dan jangan masukkan ke penawaran tertulis sampai ada target rilis.",
+            "mitigasi": "Sampaikan status FEAT-07 apa adanya dan jangan masukkan ke penawaran tertulis sampai ada target rilis.",
+            "bukti": [
+              "FEAT-07"
+            ]
+          },
+          {
+            "risiko": "Pengajuan diskon terlalu tinggi berisiko ditolak berdasarkan pola keputusan diskon yang ada. Mitigasi: ajukan di kisaran 10-15 persen dengan justifikasi nilai kontrak tahunan Rp37.800.000 dan hindari angka 17 persen ke atas.",
+            "mitigasi": "Ajukan di kisaran 10-15 persen dengan justifikasi nilai kontrak tahunan Rp37.800.000 dan hindari angka 17 persen ke atas.",
+            "bukti": [
+              "D-2026-06",
+              "D-2025-11",
+              "D-2026-10",
+              "P03"
+            ]
+          }
+        ]
+      },
+      "model": "deepseek/deepseek-v4.1-flash",
+      "dibuat": "2026-10-09T22:58:27.880Z"
+    }
+  },
+  "P01": {
+    "sidikJari": "5c27e7250c8db9ee",
+    "hasil": {
+      "accountId": "P01",
+      "rekomendasi": {
+        "ringkasan": "P01 adalah peluang Rp252.000.000 per tahun yang keputusannya ada di tangan Rina Hapsari (GM Operations), mantan champion Kopi Lintas Nusantara yang sudah pernah memakai KasirNusa. Bangun pendekatan hangat lewat Sari Puspita sebagai perantara, tetapi siapkan jawaban jujur atas janji FEAT-07 yang belum ditepati sebelum Rina membuka percakapan.",
+        "pendekatan": {
+          "pemimpin": "Bagus Prakoso (Sales Executive)",
+          "perantara": "Sari Puspita (Account Manager Kopi Lintas Nusantara)",
+          "alasan": "Rina Hapsari ditunjuk eksplisit sebagai pemegang keputusan pengadaan di P01 (I0343), dan ia pernah memakai KasirNusa saat menjadi champion di Kopi Lintas Nusantara (C01). Sari Puspita adalah satu-satunya jalur relasi nyata ke Rina dengan skor 0.462 melalui interaksi I0107, sehingga ia paling tepat membuka pintu sebelum Bagus masuk."
+        },
+        "langkah": [
+          {
+            "judul": "Aktifkan Sari Puspita untuk membuka pintu ke Rina",
+            "detail": "Bagus meminta Sari menghubungi Rina secara personal, mengingat hubungan kerja mereka di QBR 2026-01-09, untuk memperkenalkan Bagus sebagai penanggung jawab P01. Sari cukup menyampaikan bahwa KasirNusa ingin mendengar langsung kebutuhan 60 gerai Mandala, bukan mengirim proposal ulang.",
+            "bukti": [
+              "I0107",
+              "I0343",
+              "C01"
+            ]
+          },
+          {
+            "judul": "Siapkan jawaban jujur soal status FEAT-07 sebelum bertemu Rina",
+            "detail": "Bagus menyiapkan penjelasan resmi bahwa integrasi akuntansi (FEAT-07) masih dalam pengembangan tanpa tanggal pasti, karena Rina pernah menerima komitmen rilis Q3 2026 di Kopi Lintas Nusantara. Sampaikan koreksi ini lebih dulu agar Rina tidak merasa dijanjikan hal yang sama dua kali.",
+            "bukti": [
+              "FEAT-07",
+              "I0066",
+              "D-2026-08",
+              "I0223"
+            ]
+          },
+          {
+            "judul": "Minta referensi langsung dari Kopi Lintas Nusantara lewat Sari",
+            "detail": "Sari meminta Rina sendiri memberi referensi penggunaan KasirNusa di 42 outlet Kopi Lintas Nusantara, karena ia adalah champion yang tercatat di CRM akun tersebut. Tekankan manfaat operasional yang sudah terbukti, bukan fitur yang belum rilis.",
+            "bukti": [
+              "C01",
+              "I0159",
+              "I0107"
+            ]
+          },
+          {
+            "judul": "Kirim materi teknis ke Fajar Nugraha sebagai pendukung internal",
+            "detail": "Bagus mengirimkan ringkasan teknis dashboard multi-outlet dan manajemen stok ke Fajar, karena Fajar sudah merespons positif kedua kemampuan itu di sesi demo dan menilai sisi teknis untuk Rina. Posisikan Fajar sebagai validator internal, bukan pengambil keputusan.",
+            "bukti": [
+              "I0310",
+              "I0343",
+              "FEAT-06",
+              "FEAT-02"
+            ]
+          },
+          {
+            "judul": "Ajukan penawaran komersial tanpa mengulang pola diskon Kopi Lintas",
+            "detail": "Bagus menyusun penawaran P01 dengan struktur harga yang jelas dan tidak menjanjikan diskon 15% seperti yang diberikan ke Kopi Lintas Nusantara, karena riwayat persetujuan diskon menunjukkan plafon yang ketat. Bila Rina menekan harga, ajukan nilai tambah implementasi 60 gerai alih-alih potongan besar.",
+            "bukti": [
+              "D-2025-11",
+              "D-2026-10",
+              "D-2026-09"
+            ]
+          }
+        ],
+        "referensi": {
+          "akun": "Kopi Lintas Nusantara (C01)",
+          "alasan": "Rina Hapsari pernah bekerja dan menjadi champion di Kopi Lintas Nusantara, sehingga ia bisa memverifikasi sendiri kualitas implementasi KasirNusa di 42 outlet. Namun referensi ini harus dibingkai sebagai pengalaman masa lalu Rina, bukan sebagai akun yang sedang sehat, karena renewal C01 belum berkomitmen dan CFO barunya sedang mengevaluasi vendor.",
+          "bukti": [
+            "C01",
+            "I0107",
+            "I0331",
+            "D-2026-08"
+          ]
+        },
+        "risiko": [
+          {
+            "risiko": "Rina mengangkat kembali janji FEAT-07 yang belum ditepati di Kopi Lintas Nusantara dan memakainya untuk meragukan kredibilitas KasirNusa di P01.",
+            "mitigasi": "Bagus dan Sari menyampaikan status FEAT-07 secara jujur tanpa tanggal pasti, lalu menawarkan peta jalan tertulis dan komitmen komunikasi berkala sebagai ganti janji rilis.",
+            "bukti": [
+              "FEAT-07",
+              "D-2026-08",
+              "I0223"
+            ]
+          },
+          {
+            "risiko": "Eskalasi Kopi Lintas Nusantara yang menggantung membuat Sari terlihat tidak netral saat membuka pintu ke Rina, sehingga pendekatan hangat justru merusak kepercayaan.",
+            "mitigasi": "Pisahkan peran Sari sebagai penghubung personal dari urusan renewal C01, dan pastikan Bagus yang memimpin seluruh pembahasan komersial P01.",
+            "bukti": [
+              "I0331",
+              "I0344",
+              "I0107"
+            ]
+          },
+          {
+            "risiko": "Rina menuntut diskon besar dengan mengacu pada diskon 15% Kopi Lintas Nusantara, sementara riwayat persetujuan menunjukkan permintaan di atas 15% sering ditolak.",
+            "mitigasi": "Siapkan justifikasi nilai untuk 60 outlet dan opsi bertahap, serta batas diskon yang sudah disetujui internal sebelum negosiasi dimulai.",
+            "bukti": [
+              "D-2025-11",
+              "D-2026-10",
+              "D-2026-09"
+            ]
+          }
+        ]
+      },
+      "model": "deepseek/deepseek-v4.1-flash",
+      "dibuat": "2026-10-09T22:59:00.318Z"
+    }
+  },
+  "P02": {
+    "sidikJari": "66382dbc4c57b78a",
+    "hasil": {
+      "accountId": "P02",
+      "rekomendasi": {
+        "ringkasan": "Teras Kafe Group adalah deal F&B 15 outlet senilai Rp63 juta yang tertahan karena harga, dengan KasirPro menawarkan sekitar 20% lebih murah. Karena Teddy Kurniawan belum pernah memakai KasirNusa, jalur terkuat adalah memperdalam hubungan lewat Citra Ayuningtyas sambil menawarkan struktur paket bertahap seperti yang berhasil menutup Kafe Senja, bukan diskon 20% yang berulang kali ditolak.",
+        "pendekatan": {
+          "pemimpin": "Citra Ayuningtyas (Sales Executive)",
+          "perantara": "-",
+          "alasan": "Citra Ayuningtyas adalah satu-satunya jalur tercatat ke Teddy Kurniawan dengan 3 interaksi sejak 2026-07-30 hingga 2026-09-05, dan ia juga pemegang deal DL-002. Teddy Kurniawan tidak punya riwayat bekerja di pelanggan KasirNusa, sehingga tidak ada pengalaman langsung yang bisa dijadikan dasar pendekatan."
+        },
+        "langkah": [
+          {
+            "judul": "Kirim penawaran paket bertahap ke Teddy Kurniawan",
+            "detail": "Citra Ayuningtyas mengirim proposal mulai dari paket lebih kecil untuk sebagian outlet, bukan diskon 20%, meniru pendekatan Starter yang berhasil di Kafe Senja. Tekankan bahwa paket bisa dinaikkan setelah puas, sehingga harga awal tidak lagi bersaing langsung dengan KasirPro.",
+            "bukti": [
+              "DL-002",
+              "I0296",
+              "DL-007",
+              "D-2025-06"
+            ]
+          },
+          {
+            "judul": "Jadwalkan demo lanjutan dengan fokus stok bahan baku",
+            "detail": "Citra Ayuningtyas menawarkan sesi lanjutan ke Teddy Kurniawan yang menyorot manajemen stok multi-gudang dan dashboard multi-outlet, karena kebutuhan awal Teras Kafe adalah POS dan stok bahan baku untuk 15 kafe. Ini juga menjawab tindak lanjut demo yang belum dibalas sejak 2026-09-05.",
+            "bukti": [
+              "I0269",
+              "I0322",
+              "FEAT-02",
+              "FEAT-06"
+            ]
+          },
+          {
+            "judul": "Minta keputusan internal atas permintaan diskon 20%",
+            "detail": "Citra Ayuningtyas menindaklanjuti email ke Andi Wiratama agar ada keputusan resmi sebelum menyampaikan apa pun ke Teddy Kurniawan. Sampaikan bahwa permintaan 20% berada di atas batas 15% yang selama ini disetujui.",
+            "bukti": [
+              "I0348",
+              "D-2025-02",
+              "D-2025-11"
+            ]
+          },
+          {
+            "judul": "Tawarkan referensi pelanggan F&B yang menang melawan KasirPro",
+            "detail": "Citra Ayuningtyas menawarkan sesi referensi dengan Kafe Senja, pelanggan F&B sehat yang pernah dimenangkan melawan KasirPro lewat paket Starter tanpa diskon. Sampaikan bahwa Kafe Senja kini berstatus Hijau dengan NPS 8.",
+            "bukti": [
+              "DL-007",
+              "D-2025-06",
+              "C23"
+            ]
+          },
+          {
+            "judul": "Amankan komitmen tanggal sebelum menyebut fitur apa pun",
+            "detail": "Citra Ayuningtyas hanya menyebut fitur yang sudah rilis seperti POS inti, stok multi-gudang, loyalti, mode offline, dan dashboard multi-outlet. Jangan menjanjikan integrasi akuntansi karena FEAT-07 belum punya target tanggal.",
+            "bukti": [
+              "FEAT-01",
+              "FEAT-02",
+              "FEAT-03",
+              "FEAT-07"
+            ]
+          }
+        ],
+        "referensi": {
+          "akun": "Kafe Senja (C23)",
+          "alasan": "Kafe Senja adalah pelanggan F&B sehat dengan NPS 8 yang pernah dimenangkan melawan KasirPro, persis pesaing di deal Teras Kafe. Namun skala Kafe Senja hanya 6 outlet dengan paket Starter, sehingga kurang sebanding dengan 15 outlet Teras Kafe dan sebaiknya dipakai sebagai bukti kemenangan atas KasirPro, bukan tolok ukur skala.",
+          "bukti": [
+            "DL-007",
+            "D-2025-06",
+            "C23",
+            "DL-002"
+          ]
+        },
+        "risiko": [
+          {
+            "risiko": "Permintaan diskon 20% kemungkinan besar ditolak karena kebijakan diskon historis menolak hampir semua permintaan 17-25%, sehingga deal bisa kalah seperti Kafe Senja pada Maret 2025.",
+            "mitigasi": "Siapkan alternatif paket bertahap tanpa diskon seperti D-2025-06 dan minta keputusan resmi Andi Wiratama atas I0348 sebelum berkomunikasi ke Teddy Kurniawan.",
+            "bukti": [
+              "I0348",
+              "D-2025-02",
+              "D-2025-06",
+              "DL-006"
+            ]
+          },
+          {
+            "risiko": "Menjanjikan fitur yang belum siap, khususnya integrasi akuntansi FEAT-07 yang belum bertanggal, dapat mengulang masalah eskalasi yang kini menggantung di Kopi Lintas Nusantara.",
+            "mitigasi": "Batasi pembicaraan pada fitur berstatus Rilis dan jangan memberi tanggal untuk FEAT-07 sampai produk mengeluarkan jadwal pasti.",
+            "bukti": [
+              "FEAT-07",
+              "D-2026-08",
+              "D-2025-11"
+            ]
+          },
+          {
+            "risiko": "Menyodorkan Kopi Lintas Nusantara sebagai referensi berisiko karena akun itu sedang dievaluasi CFO baru dan belum ada komitmen renewal.",
+            "mitigasi": "Gunakan Kafe Senja sebagai referensi utama dan hindari menyebut Rina Hapsari sebagai kontak karena ia sudah pindah ke Grup Ritel Mandala.",
+            "bukti": [
+              "I0331",
+              "I0290",
+              "DL-007"
+            ]
+          }
+        ]
+      },
+      "model": "deepseek/deepseek-v4.1-flash",
+      "dibuat": "2026-10-09T22:59:09.399Z"
+    }
+  },
+  "P04": {
+    "sidikJari": "e18fd0d3fdd40b00",
+    "hasil": {
+      "accountId": "P04",
+      "rekomendasi": {
+        "ringkasan": "Nirwana Hotel & Resto menahan tanda tangan karena Direktur Utama Hartono Gunawan minta referensi pengguna yang mirip, jadi langkah utama minggu ini adalah menyalurkan referensi Saiyo Group lewat Yuli Astuti yang punya relasi langsung dengan Hartono. Pendekatan dibangun dari permintaan eksplisit di I0335, bukan dari pengalaman Hartono memakai KasirNusa karena DATA menyatakan ia belum pernah bekerja di pelanggan KasirNusa.",
+        "pendekatan": {
+          "pemimpin": "Bagus Prakoso (Sales Executive)",
+          "perantara": "Yuli Astuti (Purchasing Manager, Nirwana Hotel & Resto)",
+          "alasan": "Yuli Astuti adalah satu-satunya jalur nyata ke Hartono Gunawan dengan skor 0.4347 lewat relasi SALING_KENAL (bobot 0.866) sebagai rekan kerja di Nirwana sejak 2021, dan Bagus sudah berinteraksi dengannya tiga kali sampai email I0335. Hartono sendiri tidak punya riwayat bekerja di pelanggan KasirNusa, sehingga pendekatan harus lewat pengalaman pengguna lain, bukan pengalamannya sendiri."
+        },
+        "langkah": [
+          {
+            "judul": "Kirim paket referensi Saiyo Group ke Yuli Astuti",
+            "detail": "Bagus Prakoso mengirim ringkasan singkat Saiyo Group (30 outlet, health Hijau, NPS 9) ke Yuli Astuti sebagai bahan yang bisa diteruskan ke Hartono Gunawan, sesuai permintaan di I0335. Tekankan kemiripan skala 30 outlet versus 35 outlet dan industri sejenis, bukan janji fitur baru.",
+            "bukti": [
+              "I0335",
+              "C06"
+            ]
+          },
+          {
+            "judul": "Minta Budi Santoso jadi narasumber referensi",
+            "detail": "Wahyu Nugroho (Account Manager C06) menghubungi Budi Santoso (CFO Saiyo Group) untuk meminta kesediaannya bicara singkat dengan Hartono Gunawan, karena DATA mencatat Hartono adalah mantan rekan kerja Budi Santoso. Ini jalur paling hangat yang tersedia dan tidak bergantung pada kontak yang sudah pindah.",
+            "bukti": [
+              "C06",
+              "I0260",
+              "I0300"
+            ]
+          },
+          {
+            "judul": "Jadwalkan sesi referensi lewat Yuli Astuti",
+            "detail": "Bagus Prakoso meminta Yuli Astuti menjembatani jadwal 30 menit antara Hartono Gunawan dan Budi Santoso, dengan Yuli sebagai penghubung internal. Sampaikan bahwa sesi ini menjawab langsung syarat referensi yang diminta di I0335 sebelum tanda tangan.",
+            "bukti": [
+              "I0335",
+              "I0314"
+            ]
+          },
+          {
+            "judul": "Kunci cakupan produk tanpa menyentuh fitur belum rilis",
+            "detail": "Bagus Prakoso menyiapkan ringkasan cakupan berbasis fitur berstatus Rilis saja, seperti POS inti, manajemen stok multi-gudang, mode offline, dan dashboard multi-outlet, agar tidak ada janji yang belum ditepati. Fitur integrasi akuntansi dan e-faktur pajak tidak diangkat karena masih dalam pengembangan atau backlog.",
+            "bukti": [
+              "FEAT-01",
+              "FEAT-02",
+              "FEAT-04",
+              "FEAT-06"
+            ]
+          },
+          {
+            "judul": "Siapkan posisi harga sebelum permintaan diskon muncul",
+            "detail": "Bagus Prakoso menyiapkan batas diskon wajar dengan mengacu pada pola persetujuan yang ada, di mana pengajuan 10-15 persen umumnya disetujui sementara 17-25 persen ditolak. Nilai kontrak Rp147.000.000 per tahun dijadikan dasar hitungan agar negosiasi tidak bergeser ke potongan besar.",
+            "bukti": [
+              "D-2025-11",
+              "D-2026-02",
+              "D-2026-10",
+              "DL-004"
+            ]
+          }
+        ],
+        "referensi": {
+          "akun": "Saiyo Group (C06)",
+          "alasan": "Saiyo Group adalah pelanggan sehat berstatus Hijau dengan NPS 9 di industri sejenis dan skala mirip (30 outlet versus 35 outlet), sehingga kredibel sebagai referensi yang diminta Hartono Gunawan. Relasi Budi Santoso sebagai mantan rekan kerja Hartono membuat referensi ini bisa disampaikan lewat jalur personal, bukan sekadar studi kasus.",
+          "bukti": [
+            "C06",
+            "I0300",
+            "I0335"
+          ]
+        },
+        "risiko": [
+          {
+            "risiko": "Permintaan referensi di I0335 bisa berubah menjadi penundaan berulang bila tidak ada tenggat yang disepakati, sehingga deal senilai Rp147.000.000 per tahun tetap menggantung di tahap Negosiasi.",
+            "mitigasi": "Bagus Prakoso menyepakati tanggal sesi referensi dengan Yuli Astuti dalam satu kali balasan email, lalu mencatat komitmen itu sebagai langkah lanjutan yang terukur.",
+            "bukti": [
+              "I0335",
+              "DL-004"
+            ]
+          },
+          {
+            "risiko": "Mengangkat fitur yang belum rilis seperti integrasi akuntansi atau e-faktur pajak berisiko menjadi janji yang tidak ditepati dan merusak kredibilitas di depan Direktur Utama.",
+            "mitigasi": "Batasi materi presentasi pada fitur berstatus Rilis saja dan simpan fitur dalam pengembangan atau backlog untuk pembahasan peta jalan terpisah.",
+            "bukti": [
+              "FEAT-07",
+              "FEAT-08",
+              "FEAT-01"
+            ]
+          },
+          {
+            "risiko": "Tekanan negosiasi harga bisa mendorong permintaan diskon besar yang secara historis sering ditolak, sehingga memperlambat penutupan deal.",
+            "mitigasi": "Siapkan opsi nilai tambah non-diskon dan patokan diskon 10-15 persen yang punya rekam jejak persetujuan, agar permintaan di atas 17 persen bisa dialihkan.",
+            "bukti": [
+              "D-2025-11",
+              "D-2026-02",
+              "D-2026-10"
+            ]
+          }
+        ]
+      },
+      "model": "deepseek/deepseek-v4.1-flash",
+      "dibuat": "2026-10-09T22:59:16.608Z"
+    }
+  },
+  "P05": {
+    "sidikJari": "3ccd96f05964ad10",
+    "hasil": {
+      "accountId": "P05",
+      "rekomendasi": {
+        "ringkasan": "P05 masih Lead tanpa kontak dan tanpa jalur relasi, jadi minggu ini fokusnya riset stakeholder dan membuka pintu lewat referensi industri sejenis C05 Minimarket Berkah. Pendekatan dijalankan langsung oleh Citra Ayuningtyas sebagai pemegang deal, dengan Lina Marlina sebagai perantara karena dia AM yang dipercaya C05.",
+        "pendekatan": {
+          "pemimpin": "Citra Ayuningtyas (Sales Executive)",
+          "perantara": "Lina Marlina (Account Manager C05 Minimarket Berkah)",
+          "alasan": "P05 belum punya kontak maupun jalur ke pengambil keputusan, sehingga satu-satunya jalur hangat yang tercatat adalah lewat C05 yang sehat dan sejenis industrinya. Lina Marlina adalah AM yang menangani C05 dan sudah dipercaya champion Agus Salim, jadi dia paling tepat membuka pintu."
+        },
+        "langkah": [
+          {
+            "judul": "Riset stakeholder P05 lewat jalur C05",
+            "detail": "Citra meminta Lina Marlina menghubungi Agus Salim (Operations Manager C05) untuk menanyakan siapa pengambil keputusan di PT Distribusi Sumber Rejeki. Sampaikan bahwa permintaan ini murni untuk memperkenalkan KasirNusa, bukan meminta data internal.",
+            "bukti": [
+              "DL-005",
+              "C05",
+              "I0271"
+            ]
+          },
+          {
+            "judul": "Minta izin referensi ke C05",
+            "detail": "Citra menyiapkan permintaan resmi agar C05 bersedia disebut sebagai referensi industri sejenis bagi P05. Dasarkan permintaan pada hubungan sehat yang sudah terbukti di QBR terakhir.",
+            "bukti": [
+              "C05",
+              "I0271",
+              "I0231"
+            ]
+          },
+          {
+            "judul": "Susun materi pembuka berbasis kapabilitas multi-outlet",
+            "detail": "Citra menyiapkan deck singkat yang menonjolkan POS inti, manajemen stok multi-gudang, dan dashboard multi-outlet sebagai nilai untuk 40 outlet P05. Jangan menjanjikan integrasi akuntansi atau e-faktur karena statusnya belum siap.",
+            "bukti": [
+              "FEAT-01",
+              "FEAT-02",
+              "FEAT-06",
+              "FEAT-07"
+            ]
+          },
+          {
+            "judul": "Kirim perkenalan lewat perantara",
+            "detail": "Citra mengirim email perkenalan ke calon kontak P05 dengan menyebut Lina Marlina dan C05 sebagai rujukan industri. Lampirkan materi pembuka dan tawarkan sesi 30 menit minggu ini.",
+            "bukti": [
+              "DL-005",
+              "C05",
+              "I0229"
+            ]
+          },
+          {
+            "judul": "Catat kontak dan jalur di CRM",
+            "detail": "Setelah perkenalan terkirim, Citra mendaftarkan nama, jabatan, dan sumber rujukan kontak P05 di CRM agar jalur relasi terbentuk. Ini menutup celah 'belum ada kontak' yang tercatat saat ini.",
+            "bukti": [
+              "DL-005"
+            ]
+          }
+        ],
+        "referensi": {
+          "akun": "Minimarket Berkah (C05)",
+          "alasan": "C05 adalah pelanggan sehat (health Hijau) di industri sejenis dengan skala 24 outlet, dan champion-nya Agus Salim aktif serta puas pada QBR terakhir. Situasinya paling mirip dengan P05 sebagai calon pelanggan multi-outlet, sehingga kredibel sebagai referensi.",
+          "bukti": [
+            "C05",
+            "I0271",
+            "I0231"
+          ]
+        },
+        "risiko": [
+          {
+            "risiko": "Menjanjikan integrasi akuntansi (FEAT-07) atau e-faktur (FEAT-08) yang belum rilis akan merusak kredibilitas di depan prospek baru.",
+            "mitigasi": "Batasi materi pembuka pada fitur berstatus Rilis seperti FEAT-01, FEAT-02, dan FEAT-06, dan sampaikan roadmap hanya jika ditanya.",
+            "bukti": [
+              "FEAT-07",
+              "FEAT-08",
+              "FEAT-01",
+              "FEAT-02"
+            ]
+          },
+          {
+            "risiko": "Pola keputusan diskon menunjukkan permintaan di atas 15% sering ditolak, sehingga negosiasi harga bisa macet.",
+            "mitigasi": "Siapkan justifikasi nilai berbasis 40 outlet dan fitur multi-outlet sebelum membahas diskon, dan jangan membuka angka diskon di tahap Lead.",
+            "bukti": [
+              "D-2025-11",
+              "D-2026-10",
+              "DL-005"
+            ]
+          },
+          {
+            "risiko": "Memakai C05 sebagai referensi tanpa izin dapat mengganggu hubungan akun sehat tersebut.",
+            "mitigasi": "Minta persetujuan tertulis Lina Marlina dan Agus Salim sebelum nama C05 disebut ke P05.",
+            "bukti": [
+              "C05",
+              "I0271"
+            ]
+          }
+        ]
+      },
+      "model": "deepseek/deepseek-v4.1-flash",
+      "dibuat": "2026-10-09T22:59:25.750Z"
+    }
+  }
+}
