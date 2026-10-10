@@ -834,3 +834,53 @@ export function slackResponseFor(query: string): any {
 
   return { response_type: "in_channel", blocks };
 }
+
+// ===========================================================================
+// RANKING PROSPEK (deterministik) — untuk pertanyaan analitis via LLM/Slack
+// ===========================================================================
+
+export interface ProspectRankRow {
+  accountId: string;
+  nama: string;
+  industri: string;
+  stage: string;
+  nilaiTahunan: number;
+  addedValue: number;
+  persenTanpa: number;
+  persenDengan: number;
+  decisionMaker: string | null;
+  jalurHangat: boolean;
+}
+
+/**
+ * Ranking semua prospek berdasarkan metrik tertentu.
+ * by: "addedValue" (default) | "dealValue" | "winProb"
+ * Angka dihitung dari graph — bukan dari LLM.
+ */
+export function rankProspects(by: string = "addedValue", limit: number = 5): ProspectRankRow[] {
+  const g = getGraph();
+  const rows: ProspectRankRow[] = [];
+
+  for (const n of g.nodes.values()) {
+    if (n.tipe !== "akun" || n.props.tipe_akun !== "prospek") continue;
+    const a = analyzeProspect(n.id);
+    const nv = a.nilaiHarapan;
+    rows.push({
+      accountId: a.accountId,
+      nama: a.nama,
+      industri: a.industri,
+      stage: a.stage,
+      nilaiTahunan: a.nilaiTahunan,
+      addedValue: nv ? nv.tambahan : 0,
+      persenTanpa: nv ? nv.persenTanpa : 0,
+      persenDengan: nv ? nv.persenDengan : 0,
+      decisionMaker: a.decisionMaker ? `${a.decisionMaker.nama} (${a.decisionMaker.jabatan})` : null,
+      jalurHangat: a.catatan.some((c) => c.includes("jalur hangat")),
+    });
+  }
+
+  const key = (r: ProspectRankRow) =>
+    by === "dealValue" ? r.nilaiTahunan : by === "winProb" ? r.persenDengan : r.addedValue;
+  rows.sort((x, y) => key(y) - key(x));
+  return rows.slice(0, Math.max(1, limit));
+}

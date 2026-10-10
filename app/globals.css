@@ -5,16 +5,18 @@
 }
 
 :root {
-  --bg: #fdf7f2;          /* putih hangat */
+  --bg: #eef1f6;           /* abu-abu muda */
   --panel: #ffffff;        /* kartu putih */
-  --panel-2: #fff4ea;      /* panel sekunder krem oranye */
-  --border: #f0d6bf;       /* garis tepi oranye lembut */
-  --text: #2a2320;         /* teks gelap */
-  --muted: #8a7b6e;        /* teks sekunder */
-  --accent: #f3781f;       /* oranye utama */
-  --accent-dark: #d4620c;  /* oranye tua untuk hover/teks aksen */
-  --green: #e07b00;        /* "nilai/positif" dibuat senada oranye-amber */
-  --amber: #c2410c;        /* oranye kemerahan */
+  --panel-2: #f3f5f9;      /* panel sekunder abu lembut */
+  --border: #d9e0ea;       /* garis tepi abu */
+  --text: #1a2238;         /* teks navy gelap */
+  --muted: #6b7488;        /* teks sekunder abu */
+  --navy: #0f2a52;         /* biru tua — kartu/header gelap */
+  --navy-2: #15376b;       /* navy sedikit lebih terang */
+  --accent: #f3781f;       /* oranye — tombol/CTA & highlight */
+  --accent-dark: #d4620c;  /* oranye tua hover */
+  --green: #16a34a;        /* nilai positif */
+  --amber: #d97706;
   --red: #d64545;
 }
 
@@ -39,14 +41,19 @@ body {
 
 header.top {
   display: flex;
-  align-items: baseline;
+  align-items: center;
   gap: 12px;
   flex-wrap: wrap;
-  margin-bottom: 4px;
+  margin-bottom: 10px;
+  background: var(--navy);
+  color: #fff;
+  padding: 16px 20px;
+  border-radius: 12px;
 }
 
 header.top h1 {
   font-size: 24px;
+  color: #fff;
 }
 
 .subtitle {
@@ -110,7 +117,22 @@ button:disabled {
   border: 1px solid var(--border);
   border-radius: 12px;
   padding: 18px;
-  box-shadow: 0 1px 3px rgba(180, 120, 60, 0.08);
+  box-shadow: 0 1px 3px rgba(20, 40, 80, 0.06);
+}
+
+/* kartu navy untuk ringkasan prospek, decision maker, bonus */
+.card.navy {
+  background: var(--navy);
+  border-color: var(--navy);
+  color: #fff;
+}
+.card.navy h2 { color: #aab8d4; }
+.card.navy .score { color: #c3cde3; }
+.card.navy .dm-name { color: #fff; }
+.card.navy .chip {
+  background: rgba(255,255,255,0.1);
+  border-color: rgba(255,255,255,0.2);
+  color: #e8eefb;
 }
 
 .card h2 {
@@ -204,13 +226,16 @@ button:disabled {
 }
 
 .key-finding {
-  background: rgba(243, 120, 31, 0.1);
-  border: 1px solid var(--accent);
+  background: var(--navy);
+  color: #fff;
+  border: 1px solid var(--navy);
   border-radius: 10px;
-  padding: 12px 14px;
+  padding: 14px 16px;
   margin-top: 12px;
   font-size: 14px;
 }
+.key-finding .tag,
+.key-finding b { color: var(--accent); }
 
 textarea {
   width: 100%;

@@ -4,3 +4,8 @@ out
 .DS_Store
 *.log
 .claude
+
+# env & secrets
+.env
+.env.local
+.env*.local

@@ -3,143 +3,85 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Relationship Path Finder · Pitch Deck</title>
+<title>WarmIntro · Pitch Deck</title>
 <style>
   :root {
-    --bg: #0b1020;
-    --bg2: #121a30;
-    --panel: #18213c;
-    --border: #2a3356;
-    --text: #eef2fb;
-    --muted: #9aa6c7;
-    --accent: #6ea8fe;
-    --green: #3ddc97;
-    --amber: #ffcf56;
-    --red: #ff7a7a;
+    --bg: #fdf7f2;
+    --bg2: #fff4ea;
+    --panel: #ffffff;
+    --border: #f0d6bf;
+    --text: #2a2320;
+    --muted: #8a7b6e;
+    --accent: #f3781f;
+    --accent-dark: #d4620c;
+    --green: #16a34a;
+    --blue: #3b82f6;
+    --red: #d64545;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  html, body {
-    height: 100%;
-    background: var(--bg);
-    color: var(--text);
-    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-    -webkit-font-smoothing: antialiased;
-  }
+  html, body { height: 100%; background: var(--bg); color: var(--text);
+    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
   .deck { height: 100vh; width: 100vw; overflow: hidden; position: relative; }
-  .slide {
-    position: absolute;
-    inset: 0;
-    display: none;
-    flex-direction: column;
-    justify-content: center;
-    padding: 6vh 8vw;
-    animation: fade .35s ease;
-    background: radial-gradient(1200px 600px at 20% -10%, rgba(110,168,254,.12), transparent 60%),
-                radial-gradient(1000px 500px at 100% 110%, rgba(61,220,151,.1), transparent 55%);
-  }
+  .slide { position: absolute; inset: 0; display: none; flex-direction: column;
+    justify-content: center; padding: 6vh 8vw; animation: fade .35s ease;
+    background: radial-gradient(1100px 600px at 15% -10%, rgba(243,120,31,.10), transparent 60%),
+                radial-gradient(900px 500px at 100% 110%, rgba(243,120,31,.07), transparent 55%); }
   .slide.active { display: flex; }
-  @keyframes fade { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+  @keyframes fade { from { opacity:0; transform: translateY(8px);} to {opacity:1; transform:none;} }
 
-  .kicker {
-    color: var(--accent);
-    font-size: 1rem;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    font-weight: 700;
-    margin-bottom: 14px;
-  }
-  h1 { font-size: 4rem; line-height: 1.05; margin-bottom: 20px; }
-  h2 { font-size: 2.6rem; line-height: 1.1; margin-bottom: 24px; }
-  h3 { font-size: 1.5rem; color: var(--accent); margin-bottom: 10px; }
-  p, li { font-size: 1.35rem; line-height: 1.55; color: var(--text); }
+  .kicker { color: var(--accent-dark); font-size: 1rem; letter-spacing: 3px;
+    text-transform: uppercase; font-weight: 800; margin-bottom: 14px; }
+  h1 { font-size: 4.4rem; line-height: 1.03; margin-bottom: 18px; letter-spacing: -1px; }
+  h2 { font-size: 2.6rem; line-height: 1.1; margin-bottom: 22px; letter-spacing: -0.5px; }
+  h3 { font-size: 1.4rem; color: var(--accent-dark); margin-bottom: 8px; }
+  p, li { font-size: 1.3rem; line-height: 1.55; }
   .muted { color: var(--muted); }
-  .lead { font-size: 1.7rem; color: var(--muted); max-width: 60ch; }
-  ul { margin: 10px 0 0 1.3em; }
-  li { margin-bottom: 12px; }
+  .lead { font-size: 1.65rem; color: var(--muted); max-width: 62ch; }
+  ul { margin: 8px 0 0 1.3em; } li { margin-bottom: 10px; }
 
-  .pills { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 10px; }
-  .pill {
-    background: var(--panel);
-    border: 1px solid var(--border);
-    border-radius: 999px;
-    padding: 8px 18px;
-    font-size: 1rem;
-    color: var(--muted);
-  }
+  .pills { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 14px; }
+  .pill { background: var(--panel); border: 1px solid var(--border); border-radius: 999px;
+    padding: 8px 18px; font-size: .95rem; color: var(--muted); }
+  .url { color: var(--accent-dark); font-weight: 700; }
 
-  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; margin-top: 10px; }
-  .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 10px; }
-  .card {
-    background: var(--panel);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 24px 26px;
-  }
+  .grid2 { display:grid; grid-template-columns:1fr 1fr; gap:26px; margin-top:8px; }
+  .grid3 { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; margin-top:8px; }
+  .card { background: var(--panel); border:1px solid var(--border); border-radius:16px;
+    padding:22px 24px; box-shadow:0 1px 4px rgba(180,120,60,.08); }
   .card.accent { border-color: var(--accent); }
   .card.green { border-color: var(--green); }
-  .big-num { font-size: 2.8rem; font-weight: 800; color: var(--green); }
-  .big-num.blue { color: var(--accent); }
+  .big { font-size: 2.6rem; font-weight: 800; color: var(--accent-dark); }
+  .big.g { color: var(--green); }
 
-  .path {
-    display: flex; align-items: center; flex-wrap: wrap; gap: 10px;
-    font-size: 1.15rem; margin-top: 10px;
-  }
-  .node {
-    background: var(--bg2); border: 1px solid var(--border);
-    border-radius: 10px; padding: 8px 14px; font-weight: 600; white-space: nowrap;
-  }
-  .node.emp { border-color: var(--amber); }
-  .node.cust { border-color: var(--green); }
-  .node.dm { border-color: var(--accent); color: var(--accent); }
-  .arrow { color: var(--muted); font-size: 1.3rem; }
-  .weak { opacity: .6; }
+  .path { display:flex; align-items:center; flex-wrap:wrap; gap:9px; font-size:1.1rem; margin-top:8px; }
+  .node { background: var(--bg2); border:1px solid var(--border); border-radius:10px;
+    padding:7px 13px; font-weight:600; white-space:nowrap; }
+  .node.emp { border-color: var(--accent); } .node.cust { border-color: var(--green); }
+  .node.dm { border-color: var(--blue); color: var(--blue); }
+  .arrow { color: var(--muted); } .weak { opacity:.55; }
 
-  table { width: 100%; border-collapse: collapse; margin-top: 10px; }
-  th, td { text-align: left; padding: 12px 14px; border-bottom: 1px solid var(--border); font-size: 1.1rem; }
-  th { color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; font-size: .85rem; }
-  td.r { text-align: right; }
+  table { width:100%; border-collapse:collapse; margin-top:8px; }
+  th,td { text-align:left; padding:11px 13px; border-bottom:1px solid var(--border); font-size:1.05rem; }
+  th { color:var(--muted); font-size:.8rem; text-transform:uppercase; letter-spacing:1px; }
+  td.r { text-align:right; }
 
-  .quote {
-    border-left: 4px solid var(--accent);
-    padding: 12px 20px;
-    background: var(--panel);
-    border-radius: 0 12px 12px 0;
-    font-style: italic;
-    color: var(--text);
-    font-size: 1.25rem;
-    margin-top: 14px;
-  }
-  .quote .src { display:block; font-style: normal; color: var(--muted); font-size: .95rem; margin-top: 8px; }
+  .quote { border-left:4px solid var(--accent); padding:12px 20px; background:var(--panel);
+    border-radius:0 12px 12px 0; font-style:italic; font-size:1.2rem; margin-top:14px; }
+  .quote .src { display:block; font-style:normal; color:var(--muted); font-size:.9rem; margin-top:8px; }
 
-  .footer {
-    position: absolute; bottom: 22px; left: 8vw; right: 8vw;
-    display: flex; justify-content: space-between; align-items: center;
-    color: var(--muted); font-size: .9rem;
-  }
-  .dots { display: flex; gap: 8px; }
-  .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--border); }
-  .dot.on { background: var(--accent); }
+  .finding { background:rgba(243,120,31,.08); border:1px solid var(--accent);
+    border-radius:12px; padding:15px 18px; margin-top:14px; font-size:1.18rem; }
+  .tag { color: var(--accent-dark); font-weight:800; }
 
-  .nav {
-    position: fixed; bottom: 18px; right: 20px; display: flex; gap: 8px; z-index: 10;
-  }
-  .nav button {
-    background: var(--panel); color: var(--text); border: 1px solid var(--border);
-    border-radius: 8px; padding: 8px 14px; font-size: 1rem; cursor: pointer;
-  }
-  .nav button:hover { border-color: var(--accent); }
+  .footer { position:absolute; bottom:20px; left:8vw; right:8vw; display:flex;
+    justify-content:space-between; color:var(--muted); font-size:.85rem; }
+  .nav { position:fixed; bottom:16px; right:18px; display:flex; gap:8px; z-index:10; }
+  .nav button { background:var(--panel); color:var(--text); border:1px solid var(--border);
+    border-radius:8px; padding:8px 14px; font-size:1rem; cursor:pointer; }
+  .nav button:hover { border-color:var(--accent); }
 
-  .finding {
-    background: rgba(61,220,151,.08);
-    border: 1px solid var(--green);
-    border-radius: 12px; padding: 16px 20px; margin-top: 16px; font-size: 1.2rem;
-  }
-  .tag { color: var(--green); font-weight: 700; }
-
-  @media print {
-    .slide { display: flex !important; position: relative; height: 100vh; page-break-after: always; }
-    .nav, .footer .muted { display: none; }
-  }
+  @media print { .slide{display:flex!important;position:relative;height:100vh;page-break-after:always;}
+    .nav,.footer{display:none;} }
 </style>
 </head>
 <body>
@@ -148,12 +90,12 @@
   <!-- 1. COVER -->
   <section class="slide active">
     <div class="kicker">Hackathon Context Graphs · Sales Track · Tim 3</div>
-    <h1>🔗 Relationship<br/>Path Finder</h1>
-    <p class="lead">Lewat siapa jalur terbaik menuju decision maker? Kami ubah 5 sumber data terpisah menjadi satu context graph, lalu temukan jalur hangat yang terbukti ada di data.</p>
+    <h1>WarmIntro</h1>
+    <p class="lead">Lewat siapa jalur terbaik menuju decision maker — dengan buktinya. Context graph yang mengubah 8 sumber data terpisah jadi satu peta relasi, lalu menemukan jalur hangat yang terbukti ada di data.</p>
     <div class="pills">
-      <span class="pill">PT KasirNusa Teknologi</span>
-      <span class="pill">Next.js + Context Graph</span>
-      <span class="pill">Jawaban berbukti, bukan tebakan</span>
+      <span class="pill">Relationship Path Finder · PT KasirNusa</span>
+      <span class="pill">Next.js · Context Graph · LLM + Slack</span>
+      <span class="pill">Demo: <span class="url">relationship-path-finder.vercel.app</span></span>
     </div>
   </section>
 
@@ -163,9 +105,9 @@
     <h2>Pipeline macet karena<br/>bicara ke orang yang salah</h2>
     <div class="grid2">
       <div class="card">
-        <h3>Yang terjadi</h3>
+        <h3>Gejala</h3>
         <ul>
-          <li>Deal mandek di tahap demo & proposal.</li>
+          <li>Deal mandek di demo & proposal.</li>
           <li>Tim mendekati kontak yang bukan pengambil keputusan.</li>
           <li>Koneksi hangat sudah ada, tapi tak terlihat.</li>
         </ul>
@@ -173,185 +115,226 @@
       <div class="card">
         <h3>Akar penyebab</h3>
         <ul>
-          <li>Data tersebar di 6 sistem yang tak saling bicara.</li>
+          <li>Data tersebar di 6+ sistem yang tak saling bicara.</li>
           <li>CRM simpan status, bukan alasan & relasi.</li>
-          <li>Kontak cepat usang saat orang pindah jabatan.</li>
+          <li>Kontak usang saat orang pindah jabatan.</li>
         </ul>
       </div>
     </div>
-    <p class="muted" style="margin-top:22px">Insight terpenting hanya muncul saat data dihubungkan lintas sumber.</p>
+    <p class="muted" style="margin-top:20px">Insight terpenting hanya muncul saat data dihubungkan lintas sumber — bukan dari satu dashboard.</p>
   </section>
 
   <!-- 3. SOLUSI -->
   <section class="slide">
     <div class="kicker">Solusi</div>
-    <h2>Satu klik: jalur ke decision maker<br/>+ bukti + draft pesan</h2>
+    <h2>Mesin pencari jalur relasi<br/>yang bisa menjelaskan alasannya</h2>
     <div class="grid3">
-      <div class="card accent">
-        <h3>Deteksi</h3>
-        <p>Siapa decision maker sebenarnya — dibaca dari sinyal di interaksi, bukan sekadar jabatan tertinggi.</p>
-      </div>
-      <div class="card accent">
-        <h3>Jalur</h3>
-        <p>Dua jalur: terpendek (langsung) & terkuat (hangat), lengkap dengan bobot & bukti tiap langkah.</p>
-      </div>
-      <div class="card accent">
-        <h3>Aksi</h3>
-        <p>Referensi pelanggan yang relevan + draft pesan intro siap kirim + nilai deal (Rp).</p>
-      </div>
+      <div class="card accent"><h3>Deteksi</h3><p>Siapa decision maker sebenarnya — dibaca dari sinyal interaksi, bukan jabatan tertinggi.</p></div>
+      <div class="card accent"><h3>Jalur</h3><p>Dua jalur: terpendek (langsung) & terkuat (hangat), dengan bobot & bukti tiap langkah.</p></div>
+      <div class="card accent"><h3>Aksi</h3><p>Referensi, rencana aksi, draft pesan intro, dan nilai bisnis — siap pakai.</p></div>
     </div>
-    <p class="muted" style="margin-top:22px">Kami tidak membangun chatbot. Kami membangun mesin pencari jalur relasi yang bisa menjelaskan alasannya.</p>
+    <p class="muted" style="margin-top:20px">Bukan chatbot yang mengarang. Setiap jawaban menunjuk node & relasi bukti di graph.</p>
   </section>
 
   <!-- 4. CONTEXT GRAPH -->
   <section class="slide">
-    <div class="kicker">Cara Kerja · 1</div>
-    <h2>Context graph lintas 5 sumber</h2>
-    <div class="grid2">
-      <div class="card">
-        <h3>Node</h3>
-        <p>Akun · Kontak · Karyawan KasirNusa</p>
-        <h3 style="margin-top:18px">Edge berbobot (kekuatan relasi)</h3>
-        <ul>
-          <li><span class="tag">CHAMPION_DARI</span> 0.95</li>
-          <li>BEKERJA_DI (pelanggan) 0.90 · REKAN_KERJA 0.90</li>
-          <li>PERNAH_BEKERJA_DI 0.60 · SALING_KENAL 0.70</li>
-          <li class="weak">Pendekatan langsung ke prospek (macet) 0.35–0.5</li>
-        </ul>
-      </div>
-      <div class="card">
-        <h3>Sumber yang digabung</h3>
-        <ul>
-          <li>CRM accounts, contacts</li>
-          <li>Riwayat jabatan (employment history)</li>
-          <li>Deals & stage</li>
-          <li>Email & catatan meeting (interactions)</li>
-        </ul>
-        <p class="muted" style="margin-top:14px">Bobot = heuristik kekuatan relasi yang bisa disesuaikan, bukan hasil training.</p>
-      </div>
+    <div class="kicker">Context Graph · 25%</div>
+    <h2>8 sumber jadi satu jaringan</h2>
+    <div class="grid3">
+      <div class="card"><div class="big">8</div><p class="muted">sumber data terhubung (CRM, riwayat kerja, deals, interaksi, tiket, log keputusan, dll)</p></div>
+      <div class="card"><div class="big">215</div><p class="muted">node: akun, kontak, karyawan, keputusan</p></div>
+      <div class="card"><div class="big">1.141</div><p class="muted">relasi — 2 terbesar (SALING_KENAL, BERINTERAKSI) adalah relasi yang <b>dihitung</b>, tak terlihat di tabel</p></div>
+    </div>
+    <div class="finding">
+      <span class="tag">Pembeda:</span> relasi tersembunyi ditemukan dengan menghitung pola lintas-sumber (irisan periode kerja, champion yang pindah), bukan sekadar join tabel.
     </div>
   </section>
 
-  <!-- 5. DETEKSI DECISION MAKER -->
+  <!-- 5. DETEKSI DM -->
   <section class="slide">
-    <div class="kicker">Cara Kerja · 2</div>
-    <h2>Decision maker dari sinyal interaksi</h2>
-    <p class="lead">Jabatan tertinggi di CRM belum tentu pengambil keputusan nyata. Kami baca sinyalnya dulu.</p>
-    <div class="grid2" style="margin-top:18px">
-      <div class="card">
-        <h3>Tahap 1 — Sinyal eksplisit</h3>
-        <p>Cari interaksi yang menyebut kata keputusan ("keputusan", "pengadaan", "tanda tangan", "wewenang"...), lalu cocokkan jabatan yang disebut ke kontak di akun.</p>
-      </div>
-      <div class="card">
-        <h3>Tahap 2 — Fallback</h3>
-        <p>Jika tak ada sinyal, pakai ranking jabatan: Direktur Utama &gt; GM &gt; Manajer &gt; Purchasing.</p>
-      </div>
-    </div>
+    <div class="kicker">Explainability · 20%</div>
+    <h2>Decision maker dari sinyal, bukan tebakan</h2>
+    <p class="lead">Jabatan tertinggi di CRM belum tentu pengambil keputusan nyata. Kami baca sinyalnya dari teks interaksi.</p>
     <div class="quote">
       "...proposal sudah saya teruskan ke GM Operations yang baru bergabung. <b>Keputusan pengadaan</b> sistem kasir ada di beliau."
-      <span class="src">Email I0343 · dari IT Manager Mandala → otomatis menunjuk Rina (GM Operations), bukan Direktur Utama.</span>
+      <span class="src">Email I0343 · IT Manager Mandala → sistem menunjuk Rina (GM Operations), bukan Direktur Utama. Setiap klaim menunjuk ID bukti.</span>
     </div>
   </section>
 
   <!-- 6. TEMUAN P01 -->
   <section class="slide">
-    <div class="kicker">Temuan Kunci · P01</div>
+    <div class="kicker">Temuan Emas · P01</div>
     <h2>Grup Ritel Mandala — Rp 252 jt/tahun</h2>
-    <div class="finding">
-      <span class="tag">💡 Relasi tersembunyi:</span> Decision maker <b>Rina Hapsari (GM Operations)</b> adalah <b>mantan champion di C01 (Kopi Lintas Nusantara)</b> — pelanggan happy kami.
-    </div>
-    <div style="margin-top:22px">
-      <p class="muted">Jalur terpendek (dingin, sudah macet) — skor 0.18</p>
-      <div class="path weak">
-        <span class="node emp">Bagus</span><span class="arrow">→</span>
-        <span class="node">Mandala</span><span class="arrow">→</span>
-        <span class="node dm">Rina</span>
-      </div>
-      <p class="muted" style="margin-top:18px">Jalur terkuat (hangat lewat pelanggan) — skor 0.68 · ~4× lebih kuat</p>
-      <div class="path">
-        <span class="node emp">Bagus</span><span class="arrow">→</span>
-        <span class="node emp">Sari (AM C01)</span><span class="arrow">→</span>
-        <span class="node cust">Kopi Lintas Nusantara</span><span class="arrow">→</span>
-        <span class="node dm">Rina</span>
-      </div>
-    </div>
+    <div class="finding"><span class="tag">💡</span> Decision maker <b>Rina Hapsari (GM Operations)</b> adalah <b>mantan champion di C01 (Kopi Lintas Nusantara)</b> — pelanggan happy kami.</div>
+    <p class="muted" style="margin-top:18px">Terpendek (dingin, macet) — skor 0.18</p>
+    <div class="path weak"><span class="node emp">Bagus</span><span class="arrow">→</span><span class="node">Mandala</span><span class="arrow">→</span><span class="node dm">Rina</span></div>
+    <p class="muted" style="margin-top:14px">Terkuat (hangat lewat pelanggan) — skor 0.68 · ~4× lebih kuat</p>
+    <div class="path"><span class="node emp">Bagus</span><span class="arrow">→</span><span class="node emp">Sari (AM C01)</span><span class="arrow">→</span><span class="node cust">Kopi Lintas Nusantara</span><span class="arrow">→</span><span class="node dm">Rina</span></div>
   </section>
 
   <!-- 7. TEMUAN P04 -->
   <section class="slide">
-    <div class="kicker">Temuan Kunci · P04</div>
+    <div class="kicker">Temuan Emas · P04</div>
     <h2>Nirwana Hotel &amp; Resto — Rp 147 jt/tahun</h2>
-    <div class="finding">
-      <span class="tag">💡 Relasi tersembunyi:</span> Dirut <b>Hartono</b> dan <b>Budi (CFO Saiyo Group, pelanggan kami)</b> adalah <b>mantan rekan kerja di PT Sentosa Abadi (2015–2019)</b>. Terbukti di riwayat jabatan.
-    </div>
-    <div style="margin-top:22px">
-      <p class="muted">Dirut menahan tanda tangan sampai ada referensi pelanggan sejenis (email I0335).</p>
-      <p class="muted" style="margin-top:14px">Jalur terkuat (hangat) ke Hartono:</p>
-      <div class="path">
-        <span class="node emp">Bagus</span><span class="arrow">→</span>
-        <span class="node emp">Wahyu (AM Saiyo)</span><span class="arrow">→</span>
-        <span class="node cust">Saiyo Group</span><span class="arrow">→</span>
-        <span class="node">Budi (CFO)</span><span class="arrow">→</span>
-        <span class="node dm">Hartono</span>
+    <div class="finding"><span class="tag">💡</span> Dirut <b>Hartono</b> & <b>Budi (CFO Saiyo Group, pelanggan kami)</b> adalah <b>mantan rekan kerja di PT Sentosa Abadi (2015–2019)</b> — terbukti di riwayat jabatan.</div>
+    <p class="muted" style="margin-top:18px">Jalur terkuat ke Hartono (yang menahan tanda tangan sampai ada referensi):</p>
+    <div class="path"><span class="node emp">Bagus</span><span class="arrow">→</span><span class="node emp">Wahyu (AM Saiyo)</span><span class="arrow">→</span><span class="node cust">Saiyo Group</span><span class="arrow">→</span><span class="node">Budi (CFO)</span><span class="arrow">→</span><span class="node dm">Hartono</span></div>
+    <p style="margin-top:14px">Satu jalur menyelesaikan dua masalah: jembatan hangat <b>sekaligus</b> referensi hospitality yang diminta.</p>
+  </section>
+
+  <!-- 8. CROSS-TRACK -->
+  <section class="slide">
+    <div class="kicker">Bonus Lintas-Track · +5</div>
+    <h2>Sales × Support: alert reputasi</h2>
+    <div class="card accent">
+      <p>Jalur hangat ke Rina lewat <b>C01</b>. Tapi context graph juga melihat sisi Support:</p>
+      <div class="finding" style="border-color:var(--red);background:rgba(214,69,69,.07)">
+        🔴 <b>C01 punya 3 tiket prioritas kritis/tinggi yang masih TERBUKA.</b> Tangani dulu sebelum meminta C01 jadi referensi — risiko reputasi.
       </div>
-      <p style="margin-top:16px">Sekaligus Saiyo adalah referensi hospitality yang diminta Dirut. Satu jalur, dua masalah selesai.</p>
+      <p class="muted" style="margin-top:12px">Menghubungkan data tiket (track Customer Success) dengan strategi Sales — satu temuan, dua track.</p>
     </div>
   </section>
 
-  <!-- 8. DAMPAK BISNIS -->
+  <!-- 9. DAMPAK BISNIS -->
   <section class="slide">
-    <div class="kicker">Dampak Bisnis</div>
-    <h2>Rp 399 juta pipeline dibuka ulang</h2>
+    <div class="kicker">Dampak Bisnis · 25%</div>
+    <h2>Nilai yang ditambahkan, bukan klaim kosong</h2>
+    <div class="card green" style="margin-bottom:16px">
+      <p>P01 — peluang menang naik <b>35% → 65%</b> lewat jalur hangat.</p>
+      <p style="margin-top:6px">Nilai deal Rp 252 jt → <b class="tag">nilai yang ditambahkan rekomendasi = Rp 75,6 jt</b> (bukan nilai deal penuh).</p>
+    </div>
     <table>
-      <thead><tr><th>Prospek</th><th>Nilai / tahun</th><th>Aksi dari sistem</th></tr></thead>
+      <thead><tr><th>Prospek</th><th>Nilai deal</th><th class="r">Added value</th></tr></thead>
       <tbody>
-        <tr><td>P01 Grup Ritel Mandala</td><td class="r">Rp 252 jt</td><td>Jalur hangat lewat C01 ke Rina</td></tr>
-        <tr><td>P04 Nirwana Hotel &amp; Resto</td><td class="r">Rp 147 jt</td><td>Lewat Budi (Saiyo) + referensi Saiyo</td></tr>
-        <tr><td><b>Total terdampak</b></td><td class="r"><b>Rp 399 jt</b></td><td>pipeline yang bisa diselamatkan</td></tr>
+        <tr><td>P01 Grup Ritel Mandala</td><td>Rp 252 jt</td><td class="r">Rp 75,6 jt</td></tr>
+        <tr><td>P05 Distribusi Sumber Rejeki</td><td>Rp 168 jt</td><td class="r">Rp 16,8 jt</td></tr>
+        <tr><td>P04 Nirwana Hotel &amp; Resto</td><td>Rp 147 jt</td><td class="r">Rp 14,7 jt</td></tr>
       </tbody>
     </table>
-    <div class="grid3" style="margin-top:26px">
-      <div class="card green"><div class="big-num">Rp 399 jt</div><p class="muted">pipeline terdampak</p></div>
-      <div class="card accent"><div class="big-num blue">5</div><p class="muted">sumber data digabung</p></div>
-      <div class="card"><div class="big-num blue">2</div><p class="muted">relasi tersembunyi ditemukan</p></div>
-    </div>
+    <p class="muted" style="margin-top:12px">Plus preseden dari log keputusan: diskon 15% untuk akun sejenis pernah disetujui VP Sales (D-2025-11).</p>
   </section>
 
-  <!-- 9. RUBRIK -->
+  <!-- 10. CHATBOT + SLACK -->
+  <section class="slide">
+    <div class="kicker">Eksekusi & Adopsi</div>
+    <h2>Memecah silo Sales × CS — di Slack</h2>
+    <div class="finding" style="margin-bottom:16px">
+      <span class="tag">Masalah di studi kasus:</span> "Informasi antara tim Sales dan Customer Success tidak mengalir dengan baik." Keduanya bekerja di <b>silo</b> — data & keputusan tak saling terlihat.
+    </div>
+    <div class="grid2">
+      <div class="card accent">
+        <h3>Satu sumber kebenaran, lewat Slack</h3>
+        <ul>
+          <li>Sales &amp; CS tanya ke <b>graph yang sama</b> dari channel mereka.</li>
+          <li><b>Tidak perlu pindah platform</b> — tim sudah hidup di Slack tiap hari.</li>
+          <li>Adopsi tinggi: tanpa login aplikasi baru, tanpa training.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Grounded di graph</h3>
+        <p><code>/pathfinder top 5 prospek by added value</code></p>
+        <p class="muted" style="margin-top:8px">Jawaban <b>selalu dari graph</b> (angka tak dikarang). LLM hanya penerjemah pertanyaan + perangkai jawaban.</p>
+      </div>
+    </div>
+    <p class="muted" style="margin-top:16px">Insight muncul di tempat kerja tim, bukan dashboard terpisah — jembatan nyata antara dua track yang tadinya terpisah.</p>
+  </section>
+
+  <!-- 11. RUBRIK -->
   <section class="slide">
     <div class="kicker">Kenapa Menang</div>
     <h2>Dipetakan ke kriteria juri</h2>
     <table>
-      <thead><tr><th>Kriteria</th><th>Bobot</th><th>Bukti kami</th></tr></thead>
+      <thead><tr><th>Kriteria</th><th>Bobot</th><th>Bukti</th></tr></thead>
       <tbody>
-        <tr><td>Kualitas context graph</td><td class="r">25%</td><td>5 sumber; temukan relasi Rina–C01 & Budi–Hartono</td></tr>
-        <tr><td>Dampak bisnis</td><td class="r">25%</td><td>Rekomendasi konkret + Rp 399 jt + langkah nyata</td></tr>
-        <tr><td>Penalaran & explainability</td><td class="r">20%</td><td>Tiap jawaban tunjuk jalur + ID bukti (I0343, I0335)</td></tr>
-        <tr><td>Eksekusi teknis</td><td class="r">20%</td><td>Jalan di dataset penuh; jawab prospek apa pun live</td></tr>
-        <tr><td>UX & demo</td><td class="r">10%</td><td>Satu klik → jalur + bukti + draft pesan</td></tr>
-        <tr><td class="tag">Bonus lintas-track</td><td class="r">+5</td><td>Rina = mantan champion C01 → jembatan ke CS</td></tr>
+        <tr><td>Context graph</td><td>25%</td><td>8 sumber, 215 node, 2 relasi tersembunyi</td></tr>
+        <tr><td>Dampak bisnis</td><td>25%</td><td>Added value Rp 75,6 jt + preseden keputusan</td></tr>
+        <tr><td>Explainability</td><td>20%</td><td>Jalur bukti + ID interaksi (I0343, I0335)</td></tr>
+        <tr><td>Eksekusi teknis</td><td>20%</td><td>Jalan di dataset penuh; query & chatbot live</td></tr>
+        <tr><td>UX & demo</td><td>10%</td><td>Graph interaktif + Slack + draft pesan</td></tr>
+        <tr><td class="tag">Bonus lintas-track</td><td>+5</td><td>Alert Sales × Support (C01 tiket kritis)</td></tr>
       </tbody>
     </table>
   </section>
 
-  <!-- 10. DEMO + CLOSING -->
+  <!-- 12. SUCCESS METRICS -->
+  <section class="slide">
+    <div class="kicker">Success Metrics</div>
+    <h2>Bagaimana kami mengukur keberhasilan</h2>
+    <div class="grid3">
+      <div class="card accent">
+        <h3>Leading (proses)</h3>
+        <ul>
+          <li>Waktu temukan jalur ke DM: dari jam → <b>detik</b></li>
+          <li>% deal dengan DM teridentifikasi benar</li>
+          <li>% pendekatan lewat jalur hangat (vs dingin)</li>
+        </ul>
+      </div>
+      <div class="card accent">
+        <h3>Lagging (hasil)</h3>
+        <ul>
+          <li>Conversion rate stage Proposal → Won</li>
+          <li>Siklus deal lebih pendek (hari)</li>
+          <li>Added value pipeline terealisasi</li>
+        </ul>
+      </div>
+      <div class="card green">
+        <h3>Target 2027 (fokus Sales)</h3>
+        <ul>
+          <li><b>3 akun baru &gt;30 outlet</b> — target utama</li>
+          <li>P01 (60) &amp; P04 (35) sudah &gt;30 outlet</li>
+          <li>Bonus: alert cross-track jaga retensi</li>
+        </ul>
+      </div>
+    </div>
+    <div class="finding">
+      <span class="tag">Baseline terukur hari ini:</span> 2 jalur hangat tervalidasi (P01, P04) · potensi added value <b>Rp 107 jt</b> dari 5 prospek · 13 relasi tersembunyi terdeteksi otomatis.
+    </div>
+  </section>
+
+  <!-- 13. TEAM -->
+  <section class="slide">
+    <div class="kicker">Tim</div>
+    <h2>Siapa di balik WarmIntro</h2>
+    <div class="grid3">
+      <div class="card">
+        <div class="big" style="font-size:1.8rem">Handaru</div>
+        <h3>Hacker</h3>
+        <p class="muted">Engineering — context graph, path finding, integrasi LLM &amp; Slack.</p>
+      </div>
+      <div class="card">
+        <div class="big" style="font-size:1.8rem">Krisna</div>
+        <h3>Hustler</h3>
+        <p class="muted">Business — strategi Sales, dampak bisnis, narasi pitch.</p>
+      </div>
+      <div class="card">
+        <div class="big" style="font-size:1.8rem">Yusril</div>
+        <h3>Hipster</h3>
+        <p class="muted">Design — UX, visualisasi graph, alur demo.</p>
+      </div>
+    </div>
+    <p class="muted" style="margin-top:20px">Tim 3 · Sales Track · Hackathon Context Graphs · PT KasirNusa</p>
+  </section>
+
+  <!-- 14. DEMO + CLOSING -->
   <section class="slide">
     <div class="kicker">Demo &amp; Penutup</div>
-    <h2>Alur demo 2 menit</h2>
+    <h2>Alur demo 3 menit</h2>
     <div class="grid2">
       <div class="card">
         <ol style="margin-left:1.2em">
-          <li>Pilih prospek <b>P01</b>.</li>
-          <li>Tunjuk: CRM bilang Dirut, graph temukan Rina lewat I0343.</li>
-          <li>Bandingkan jalur terpendek vs terkuat (Rina–C01).</li>
-          <li>Salin draft pesan intro.</li>
+          <li>Pilih <b>P01</b> → DM Rina (bukti I0343).</li>
+          <li>Terpendek vs terkuat (jalur hangat lewat C01).</li>
+          <li>Alert cross-track: C01 tiket kritis.</li>
+          <li>Explore Graph: tunjukkan jaringan 215 node.</li>
+          <li>Slack: "top 5 prospek by added value" live.</li>
           <li>Juri lempar prospek lain → jawab langsung.</li>
         </ol>
       </div>
       <div class="card green">
-        <h3>Inti pesan kami</h3>
+        <h3>Inti pesan</h3>
         <p>Jalur terpendek = pendekatan dingin yang macet. Jalur terkuat = koneksi hangat lewat pelanggan tepercaya — dan kami bisa membuktikannya di graph.</p>
-        <p style="margin-top:18px" class="tag">Terima kasih.</p>
+        <p style="margin-top:16px" class="tag">WarmIntro · Terima kasih.</p>
+        <p class="muted" style="margin-top:6px">relationship-path-finder.vercel.app</p>
       </div>
     </div>
   </section>
@@ -366,28 +349,16 @@
 <script>
   let i = 0;
   const slides = Array.from(document.querySelectorAll('.slide'));
-  function render() {
-    slides.forEach((s, k) => s.classList.toggle('active', k === i));
-    // tambah footer dots per slide aktif
-  }
-  function go(d) {
-    i = Math.max(0, Math.min(slides.length - 1, i + d));
-    render();
-  }
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') go(1);
-    if (e.key === 'ArrowLeft' || e.key === 'PageUp') go(-1);
-    if (e.key === 'Home') { i = 0; render(); }
-    if (e.key === 'End') { i = slides.length - 1; render(); }
+  function render(){ slides.forEach((s,k)=>s.classList.toggle('active',k===i)); }
+  function go(d){ i=Math.max(0,Math.min(slides.length-1,i+d)); render(); }
+  document.addEventListener('keydown',e=>{
+    if(e.key==='ArrowRight'||e.key===' '||e.key==='PageDown') go(1);
+    if(e.key==='ArrowLeft'||e.key==='PageUp') go(-1);
+    if(e.key==='Home'){i=0;render();} if(e.key==='End'){i=slides.length-1;render();}
   });
-  // footer dengan nomor slide
-  slides.forEach((s, k) => {
-    const f = document.createElement('div');
-    f.className = 'footer';
-    f.innerHTML = '<span class="muted">Relationship Path Finder · KasirNusa</span>' +
-                  '<span class="muted">' + (k + 1) + ' / ' + slides.length + '</span>';
-    s.appendChild(f);
-  });
+  slides.forEach((s,k)=>{ const f=document.createElement('div'); f.className='footer';
+    f.innerHTML='<span>WarmIntro · relationship-path-finder.vercel.app</span><span>'+(k+1)+' / '+slides.length+'</span>';
+    s.appendChild(f); });
   render();
 </script>
 </body>

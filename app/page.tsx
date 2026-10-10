@@ -112,7 +112,7 @@ export default function Home() {
         <a href="/explore" className="nav-link">🕸️ Explore Graph →</a>
       </header>
       <p className="subtitle">
-        Lewat siapa jalur terbaik menuju decision maker? Context graph lintas 5 sumber data, dengan jalur bukti.
+        Lewat siapa jalur terbaik menuju <span style={{ color: "var(--accent)", fontWeight: 700 }}>decision maker</span>? Context graph lintas 8 sumber data, dengan jalur bukti.
       </p>
 
       <div className="controls">
@@ -168,7 +168,7 @@ export default function Home() {
         )}
 
         <div className="grid">
-          <div className="card">
+          <div className="card navy">
             <h2>Prospek</h2>
             <div className="dm-name">{data.nama}</div>
             <div className="stat" style={{ marginTop: 8 }}>
