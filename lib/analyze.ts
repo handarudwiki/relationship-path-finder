@@ -276,17 +276,27 @@ export function analyzeProspect(accountId: string): ProspectAnalysis {
   }
 
   // Apakah decision maker punya relasi historis dengan pelanggan referensi?
-  // Jika ya, ini "jalur hangat" (warm path) — nilai jual utama solusi ini.
+  // "Jalur hangat" (warm path) = jalur terkuat menuju DM melewati PELANGGAN kita
+  // dan/atau memakai relasi tepercaya (champion, mantan rekan kerja, pernah bekerja).
+  // Definisi berbasis JALUR (bukan hanya relasi langsung DM) supaya konsisten:
+  //  - P01: lewat C01 (champion Rina)      -> hangat
+  //  - P04: lewat Saiyo + Budi (SALING_KENAL dgn Hartono) -> hangat
   let jalurHangat = false;
-  if (referensi && dm) {
-    const relasiKeRef = new Set<string>();
-    for (const e of g.adj.get(dm.contactId) || []) {
-      if (e.to === referensi.accountId) relasiKeRef.add(e.relasi);
-    }
-    if (relasiKeRef.size > 0) {
+  const WARM_RELATIONS = new Set(["CHAMPION_DARI", "SALING_KENAL", "PERNAH_BEKERJA_DI", "ACCOUNT_OWNER"]);
+  if (strongest && dm) {
+    const lewatPelanggan = strongest.nodes.some(
+      (n) => n.tipe === "akun" && n.props.tipe_akun === "pelanggan"
+    );
+    const pakaiRelasiHangat = strongest.edges.some((e) => WARM_RELATIONS.has(e.relasi));
+    if (lewatPelanggan && pakaiRelasiHangat) {
       jalurHangat = true;
+      // nama pelanggan jembatan di jalur
+      const pelangganJembatan = strongest.nodes.find(
+        (n) => n.tipe === "akun" && n.props.tipe_akun === "pelanggan"
+      );
+      const refNama = pelangganJembatan ? pelangganJembatan.label : referensi ? referensi.nama : "pelanggan kami";
       catatan.push(
-        `TEMUAN KUNCI: ${dm.nama} punya relasi historis dengan pelanggan kami ${referensi.nama} (${Array.from(relasiKeRef).join(", ")}). Ini jalur hangat, bukan pendekatan dingin — minta ${referensi.nama} memberi referensi langsung.`
+        `TEMUAN KUNCI: ada jalur hangat ke ${dm.nama} lewat pelanggan kami ${refNama} — bukan pendekatan dingin. Manfaatkan koneksi ini untuk perkenalan/referensi.`
       );
     }
   }
